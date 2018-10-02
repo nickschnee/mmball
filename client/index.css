@@ -1,0 +1,82 @@
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    
+    background-color: #f8f8f8;
+    transition: background-color 200ms ease-in;
+}
+
+body.state-on {
+    background: #eaffde;
+    transition: background-color 200ms ease-out;
+}
+
+.title {
+    font-size: 2em;
+    padding: 0.5em 0em 0.5em 0em;
+    text-align: center;
+    background-color: rgb(17,94,162);
+    color: white;
+}
+
+.container {
+    height: 100%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#led-button {
+    border: none;
+    cursor: pointer;
+    background: #ccc;
+    border-radius: 50%;
+    box-shadow: 0 5px 0 0 #aaa;
+    
+    width: 20vmin;
+    height: 20vmin;
+    min-width: 200px;
+    min-height: 200px;
+    
+    flex: 0;
+    
+    transition: background-color 200ms ease-in, color 200ms ease-in, box-shadow 200ms ease-in;
+}
+
+#led-button:hover {
+    background-color: #c0c0c0;
+}
+
+#led-button:active {
+    box-shadow: 0 0 0 0 #ccc;
+}
+
+body.state-on #led-button {
+    background-color: #a4fc71;
+    box-shadow: 0 5px 0 0 #87ce5f, 0 5px 5px 0 #a4fc71;
+    transition: background-color 200ms ease-out, color 200ms ease-out, box-shadow 200ms ease-out;
+}
+
+body.state-on #led-button:active {
+    box-shadow: 0 0 0 0 #ccc;
+    transition: none;
+}
+
+body.state-on #led-button:hover {
+    background-color: #98ea69;
+}
