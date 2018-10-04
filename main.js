@@ -68,7 +68,7 @@ board.on('ready', function () {
       };
     }); // ENDE SENSOR 2
 
-  }; // ENDE Function TEST
+  }; // ENDE Function TEST sdsd
 
   io.on('connection', function(socket) {
 
