@@ -33,7 +33,6 @@ var brightness;
 var score = 0;
 var gamerunning;
 
-
 // RASPBERRY BOARD
 board.on('ready', function () {
   sensor1 = new five.Sensor.Digital('P1-11');
@@ -44,61 +43,45 @@ board.on('ready', function () {
     console.log( "Button pressed" );
     //io.emit('game-status', "THE GAME IS STARTING");
     io.emit('button-status', true);
-
   }); // Button endet Hier
 
-});
+  function test(){
+    console.log("FÜÜÜÜDLÄÄÄÄ!");
+
+    // Sensoren aktivieren
+    sensor1.on("change", function() {
+      brightness = this.value;
+      console.log("Die Helligkeit Sensor 1 ist:" + brightness);
+
+      if (brightness == 0){
+        score = score + 10;
+        io.emit('sensor-status', score);
+
+      };
+    }); // ENDE SENSOR 1
+
+    sensor2.on("change", function() {
+      brightness = this.value;
+      console.log("Die Helligkeit Sensor 2 ist:" + brightness);
+
+      if (brightness == 0){
+        score = score + 50;
+        io.emit('sensor-status', score);
+
+      };
+    }); // ENDE SENSOR 2
+
+  }; // ENDE Function TEST
+
+  io.on('connection', function(socket) {
+
+    socket.on('gamestart', function(gamestart){
+      //console.log("Das funktioniert so toll!");
+      gamerunning = true;
+      test();
+      console.log("Das Spiel läuft " + gamerunning);
+    });
+  }); //ENDE IO CONNECTION
+}); // ENDE BOARD
 
 // SOCKET
-io.on('connection', function(socket) {
-
-  socket.on('gamestart', function(gamestart){
-    //console.log("Das funktioniert so toll!");
-    gamerunning = true;
-    console.log("Das Spiel läuft " + gamerunning);
-  });
-
-});
-
-
-if (gamerunning == true){
-  console.log("Sensoren messen jetzt!")
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Sensoren Depot
-/*sensor1.on("change", function() {
-  brightness = this.value;
-  //console.log("Die Helligkeit Sensor 1 ist:" + brightness);
-
-  if (brightness == 0){
-    score = score + 10;
-    io.emit('sensor-status', score);
-
-  };
-});
-
-sensor2.on("change", function() {
-  brightness = this.value;
-  //console.log("Die Helligkeit Sensor 2 ist:" + brightness);
-
-  if (brightness == 0){
-    score = score + 50;
-    io.emit('sensor-status', score);
-
-  };
-}); */
