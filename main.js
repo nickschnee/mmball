@@ -23,16 +23,15 @@ app.get('/', function(req, res) {
 // Add static files files in client folder
 app.use(express.static(__dirname + '/client'));
 
-
-
 // Variables
 var led;
 var sensor1;
 var sensor2;
 var button;
 
-var brightness
+var brightness;
 var score = 0;
+var gamerunning;
 
 
 // RASPBERRY BOARD
@@ -46,50 +45,60 @@ board.on('ready', function () {
     //io.emit('game-status', "THE GAME IS STARTING");
     io.emit('button-status', true);
 
-    sensor1.on("change", function() {
-      brightness = this.value;
-      //console.log("Die Helligkeit Sensor 1 ist:" + brightness);
-
-      if (brightness == 0){
-        score = score + 10;
-        io.emit('sensor-status', score);
-
-      };
-    });
-
-    sensor2.on("change", function() {
-      brightness = this.value;
-      //console.log("Die Helligkeit Sensor 2 ist:" + brightness);
-
-      if (brightness == 0){
-        score = score + 50;
-        io.emit('sensor-status', score);
-
-      };
-    });
-
-  });
+  }); // Button endet Hier
 
 });
 
-// SOCKET WHEN A CLIENT CONNECTS TO SERVER
+// SOCKET
 io.on('connection', function(socket) {
 
   socket.on('gamestart', function(gamestart){
-    console.log("Das funktioniert so toll!");
+    //console.log("Das funktioniert so toll!");
+    gamerunning = true;
+    console.log("Das Spiel läuft " + gamerunning);
   });
-  
-  //console.log('New user connected');
 
-  // Send the current ledState to the client
-  //io.emit('update-status', ledIsOn);
-  //io.emit('sensor-status', score);
-
-  // On led button press in browser
-  /*socket.on('click', function(msg) {
-  console.log('Clicked');
-  ledIsOn = !ledIsOn;
-  led.toggle(); // If light is on off, then activate it, else deactivate
-  io.emit('update-status', ledIsOn);
-});*/
 });
+
+
+if (gamerunning == true){
+  console.log("Sensoren messen jetzt!")
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Sensoren Depot
+/*sensor1.on("change", function() {
+  brightness = this.value;
+  //console.log("Die Helligkeit Sensor 1 ist:" + brightness);
+
+  if (brightness == 0){
+    score = score + 10;
+    io.emit('sensor-status', score);
+
+  };
+});
+
+sensor2.on("change", function() {
+  brightness = this.value;
+  //console.log("Die Helligkeit Sensor 2 ist:" + brightness);
+
+  if (brightness == 0){
+    score = score + 50;
+    io.emit('sensor-status', score);
+
+  };
+}); */
