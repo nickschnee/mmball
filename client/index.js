@@ -38,9 +38,10 @@ function game () {
       console.log("Lasst die Spiele beginnen!");
       $("#gameinfo").remove();
 
-      socket.on('sensor-status', function(data) {
-        console.log("Ein Empfängnis! " + data);
-        document.getElementById("score").innerHTML = data;
+      socket.on('sensor1', function(data) {
+        console.log("Score Sensor 1");
+
+        //document.getElementById("score").innerHTML = data;
       });
 
       var lefttime = 10;

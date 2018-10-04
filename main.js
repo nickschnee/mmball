@@ -54,22 +54,20 @@ board.on('ready', function () {
       console.log("Die Helligkeit Sensor 1 ist:" + brightness);
 
       if (brightness == 0){
-        score = score + 10;
-        io.emit('sensor-status', score);
+        io.emit('sensor1', true);
 
       };
     }); // ENDE SENSOR 1
 
-    sensor2.on("change", function() {
+    /*sensor2.on("change", function() {
       brightness = this.value;
       console.log("Die Helligkeit Sensor 2 ist:" + brightness);
 
       if (brightness == 0){
-        score = score + 50;
-        io.emit('sensor-status', score);
+        io.emit('sensor-status', sensor2);
 
       };
-    }); // ENDE SENSOR 2
+    }); // ENDE SENSOR 2 */
 
   }; // ENDE Function TEST
 
