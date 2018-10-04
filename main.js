@@ -46,11 +46,6 @@ board.on('ready', function () {
     //io.emit('game-status', "THE GAME IS STARTING");
     io.emit('button-status', true);
 
-    setTimeout(function(){
-      console.log("Game starting in 3...");
-      io.emit('game-status', "NOW PLAYING");
-    }, 3000);
-
     sensor1.on("change", function() {
       brightness = this.value;
       console.log("Die Helligkeit Sensor 1 ist:" + brightness);
