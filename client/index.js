@@ -33,12 +33,10 @@ socket.on('sensor-status', function(data) {
 socket.on('button-status', function(buttonstatus) {
   console.log("Status received " + buttonstatus);
 
-  document.getElementById("gameinfo").innerHTML = "Game starting in 3 Seconds";
-
-  var timeleft = 3;
+  var timeleft = 10;
   var downloadTimer = setInterval(function(){
     timeleft--;
-    document.getElementById("countdowntimer").textContent = timeleft;
+    document.getElementById("gameinfo").textContent = "Game starting in " + timeleft + " Seconds";
     if(timeleft <= 0)
     clearInterval(downloadTimer);
   },1000);
