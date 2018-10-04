@@ -3,6 +3,7 @@ var socket = io.connect(window.location.href);
 var buttonstatus = false;
 var gamestart = false;
 var gamefinish = false;
+var score = 0;
 
 /*socket.on('sensor-status', function(data) {
 console.log("Ein Empfängnis! " + data);
@@ -40,8 +41,14 @@ function game () {
 
       socket.on('sensor1', function(data) {
         console.log("Score Sensor 1");
+        score = score + 10;
+        document.getElementById("score").innerHTML = score;
+      });
 
-        //document.getElementById("score").innerHTML = data;
+      socket.on('sensor2', function(data) {
+        console.log("Score Sensor 2");
+        score = score + 50;
+        document.getElementById("score").innerHTML = score;
       });
 
       var lefttime = 10;
