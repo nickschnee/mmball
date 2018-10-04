@@ -48,7 +48,7 @@ board.on('ready', function () {
 
     sensor1.on("change", function() {
       brightness = this.value;
-      console.log("Die Helligkeit Sensor 1 ist:" + brightness);
+      //console.log("Die Helligkeit Sensor 1 ist:" + brightness);
 
       if (brightness == 0){
         score = score + 10;
@@ -74,7 +74,12 @@ board.on('ready', function () {
 
 // SOCKET WHEN A CLIENT CONNECTS TO SERVER
 io.on('connection', function(socket) {
-  console.log('New user connected');
+
+  socket.on('gamestart', function(gamestart){
+    console.log("Das funktioniert so toll!");
+  });
+  
+  //console.log('New user connected');
 
   // Send the current ledState to the client
   //io.emit('update-status', ledIsOn);

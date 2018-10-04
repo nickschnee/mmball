@@ -27,6 +27,8 @@ function game () {
 
     if(timeleft <= 0){
       gamestart = true;
+      socket.emit('gamestart');
+
       console.log("Der Countdown ist fertig!")
       console.log(gamestart);
       clearInterval(downloadTimer);
