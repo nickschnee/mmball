@@ -2,12 +2,13 @@ var socket = io.connect(window.location.href);
 
 var buttonstatus = false;
 var gamestart = false;
+var gamefinish = false;
 
-socket.on('sensor-status', function(data) {
-  console.log("Ein Empfängnis! " + data);
-  document.getElementById("score").innerHTML = data;
+/*socket.on('sensor-status', function(data) {
+console.log("Ein Empfängnis! " + data);
+document.getElementById("score").innerHTML = data;
 
-});
+}); */
 
 socket.on('button-status', function(buttonstatus) {
   console.log("Buttonstatus received " + buttonstatus);
@@ -19,7 +20,7 @@ socket.on('button-status', function(buttonstatus) {
 
 // Functions
 function game () {
-  var timeleft = 10;
+  var timeleft = 5;
   var downloadTimer = setInterval(function(){
     timeleft--;
     document.getElementById("gameinfo").textContent = "Game starting in " + timeleft + " Seconds";
@@ -33,14 +34,26 @@ function game () {
 
     if (gamestart == true) {
       console.log("Lasst die Spiele beginnen!");
+      $("#gameinfo").remove();
+
+      socket.on('sensor-status', function(data) {
+        console.log("Ein Empfängnis! " + data);
+        document.getElementById("score").innerHTML = data;
+      });
 
       var lefttime = 10;
       var Timerdownload = setInterval(function(){
         document.getElementById("progressBar").value = 10 - --lefttime;
-        if(lefttime <= 0)
-        clearInterval(Timerdownload);
+
+        if(lefttime <= 0){
+          clearInterval(Timerdownload);
+          console.log("Game fertig.")
+          gamefinish = true;
+          return;
+        }
+
       },1000);
-    }
+    };
 
   },1000);
 
