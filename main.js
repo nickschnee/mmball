@@ -43,7 +43,8 @@ board.on('ready', function () {
 
   button.on("press", function() {
     console.log( "Button pressed" );
-    io.emit('game-status', "THE GAME IS STARTING");
+    //io.emit('game-status', "THE GAME IS STARTING");
+    io.emit('button-status', true);
 
     setTimeout(function(){
       console.log("Game starting in 3...");
