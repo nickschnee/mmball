@@ -50,34 +50,41 @@ board.on('ready', function () {
     // Sensoren aktivieren
     sensor1.on("change", function() {
       brightness = this.value;
-      console.log("Die Helligkeit Sensor 1 ist:" + brightness);
+      console.log("SCORE 1");
 
       if (brightness == 0){
-        io.emit('sensor1', true);
+        if (gamerunning){
+          io.emit('sensor1', true);
+        };
 
       };
     }); // ENDE SENSOR 1
 
     sensor2.on("change", function() {
       brightness = this.value;
-      console.log("Die Helligkeit Sensor 2 ist:" + brightness);
+      console.log("SCORE 2");
 
       if (brightness == 0){
-        io.emit('sensor2', true);
+        if (gamerunning){
+          io.emit('sensor2', true);
+        };
 
       };
     }); // ENDE SENSOR 2
 
-  }; // ENDE Function TEST sdsd
+  }; // ENDE Function GAMEON
 
   io.on('connection', function(socket) {
 
     socket.on('gamestart', function(gamestart){
       //console.log("Das funktioniert so toll!");
-      gamerunning = true;
-      gameon();
-      console.log("Das Spiel läuft " + gamerunning);
-    });
+      gamerunning = !gamerunning;
+      if (gamerunning){
+        gameon();
+        console.log("Das Spiel läuft ");
+        console.log(gamerunning);
+      };
+    }); // ENDE Function gamestart
   }); //ENDE IO CONNECTION
 }); // ENDE BOARD
 

@@ -56,6 +56,7 @@ function game () {
         document.getElementById("progressBar").value = 10 - --lefttime;
 
         if(lefttime <= 0){
+          socket.emit('gamestart');
           clearInterval(Timerdownload);
           console.log("Game fertig.")
           gamefinish = true;
