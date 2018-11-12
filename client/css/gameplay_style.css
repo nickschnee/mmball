@@ -1,0 +1,69 @@
+/* Punktestand */
+.actualpoint {
+    font-size: 500%;
+    color: #42f459;
+} 
+#yourpoint {
+    position: absolute;
+    bottom: 150px;
+    left: 50px;
+    z-index: 100;
+}
+#enemypoint {
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    z-index: 99;
+}
+
+#timeremaining {font-size: 800%;
+    color: #42f459;
+position: absolute;
+bottom 50px;
+right: 50px;
+z-index: 98;}
+
+/* Grid */
+
+.grid {
+    top: -200px;
+    bottom: -600px;
+    left: -400px;
+    right: -400px;
+    position: absolute;
+    background-image: linear-gradient(#FF0092 1px, transparent 2px), linear-gradient(90deg, #FF0092 1px, transparent 2px);
+    background-size: 3% 3%, 3% 3%;
+    background-position: 0 0, 0 0;
+    -webkit-transform: perspective(300px) rotateX(80deg);
+    transform: perspective(300px) rotateX(80deg);
+    -webkit-animation: throughSpace 2s linear;
+    animation: throughSpace 2s linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+
+/* Grid Animation */ 
+@-webkit-keyframes throughSpace {
+    0% {
+        -webkit-transform: perspective(300px) rotateX(80deg) translateY(0%);
+        transform: perspective(300px) rotateX(80deg) translateY(0%);
+    }
+    100% {
+        -webkit-transform: perspective(300px) rotateX(80deg) translateY(5.8%);
+        transform: perspective(300px) rotateX(80deg) translateY(5.8%);
+    }
+}
+@keyframes throughSpace {
+    0% {
+        -webkit-transform: perspective(300px) rotateX(80deg) translateY(0%);
+        transform: perspective(300px) rotateX(80deg) translateY(0%);
+    }
+
+    100% {
+        -webkit-transform: perspective(300px) rotateX(80deg) translateY(5.8%);
+        transform: perspective(300px) rotateX(80deg) translateY(5.8%);
+    }
+}
+
+
+

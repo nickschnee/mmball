@@ -1,0 +1,105 @@
+@charset "utf-8";
+/* On screens that are 600px */
+@media screen and (max-width: 1099px) {
+  * {
+    box-sizing: border-box;
+  }
+
+
+body {
+    font-family: 'VT323', monospace;
+    color: #FF0092;
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+h1 {
+    font-size: 600%;
+    text-shadow: -3px 0 #fffa00, 0 3px #fffa00, 3px 0 #fffa00, 0 -3px #fffa00;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+h2 {
+    font-size: 300%;
+    text-shadow: -2px 0 #fffa00, 0 2px #fffa00, 2px 0 #fffa00, 0 -2px #fffa00;
+}
+h3 {
+    font-size: 200%;
+    text-shadow: -1px 0 #fffa00, 0 1px #fffa00, 1px 0 #fffa00, 0 -1px #fffa00;
+}
+p {
+    font-size: 200%;
+}
+div {
+    margin-left: auto;
+    margin-right: auto;
+}
+table {
+    font-size: 200%;
+    text-align: right;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#overall-scores {}
+#bern-vs-chur {}
+
+
+/* Blinkende Schrift */
+.blink {
+    animation: blinkingText 0.8s infinite;
+}
+
+@keyframes blinkingText {
+    0% {
+        text-shadow: 0px 0 #fffa00, 0 0px #fffa00, 0px 0 #fffa00, 0 0px #fffa00;
+    }
+
+    100% {
+        text-shadow: -1px 0 #fffa00, 0 1px #fffa00, 1px 0 #fffa00, 0 -1px #fffa00;
+    }
+}
+
+a {color: #FF0092;}
+
+a:hover {color: #fffa00;}
+.playerButton {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7c2e8f), color-stop(1, #FF0092));
+	background:-moz-linear-gradient(top, #7c2e8f 5%, #FF0092 100%);
+	background:-webkit-linear-gradient(top, #7c2e8f 5%, #FF0092 100%);
+	background:-o-linear-gradient(top, #7c2e8f 5%, #FF0092 100%);
+	background:-ms-linear-gradient(top, #7c2e8f 5%, #FF0092 100%);
+	background:linear-gradient(to bottom, #7c2e8f 5%, #FF0092 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7c2e8f', endColorstr='#FF0092',GradientType=0);
+	background-color:#7c2e8f;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	display:inline-block;
+	cursor:pointer;
+	color:#fffa00;
+	font-family:'VT323', monospace;
+	font-size:20px;
+	padding:14px 47px;
+	text-decoration:none;
+}
+.playerButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #FF0092), color-stop(1, #7c2e8f));
+	background:-moz-linear-gradient(top, #FF0092 5%, #7c2e8f 100%);
+	background:-webkit-linear-gradient(top, #FF0092 5%, #7c2e8f 100%);
+	background:-o-linear-gradient(top, #FF0092 5%, #7c2e8f 100%);
+	background:-ms-linear-gradient(top, #FF0092 5%, #7c2e8f 100%);
+	background:linear-gradient(to bottom, #FF0092 5%, #7c2e8f 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF0092', endColorstr='#7c2e8f',GradientType=0);
+	background-color:#FF0092;
+}
+.playerButton:active {
+	position:relative;
+	top:1px;
+}
+    iframe {
+        width: auto;
+    }
