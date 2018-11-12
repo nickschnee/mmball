@@ -13,7 +13,7 @@ var board = new five.Board({
 
 // Start the express server
 server.listen(3000);
-console.log('Listening on 3000');
+console.log('Access client screen on <IP>:3000');
 
 app.get('/', function(req, res) {
   // Join all arguments together and normalize the resulting path.
@@ -51,6 +51,7 @@ board.on('ready', function () {
     sensor1.on("change", function() {
       brightness = this.value;
       console.log("SCORE 1");
+      console.log(this.scaleTo(0, 100));
 
       if (brightness == 0){
         if (gamerunning){

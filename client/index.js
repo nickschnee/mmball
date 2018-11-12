@@ -51,9 +51,9 @@ function game () {
         document.getElementById("score").innerHTML = score;
       });
 
-      var lefttime = 10;
+      var lefttime = 60;
       var Timerdownload = setInterval(function(){
-        document.getElementById("progressBar").value = 10 - --lefttime;
+        document.getElementById("progressBar").value = 60 - --lefttime;
 
         if(lefttime <= 0){
           socket.emit('gamestart');
@@ -63,7 +63,7 @@ function game () {
           return;
         }
 
-      },1000);
+      },60000);
     };
 
   },1000);
