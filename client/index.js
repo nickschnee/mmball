@@ -1,3 +1,5 @@
+// NICHT LÖSCHEN - WICHTIGES JS FILE, DARAUF BERUHT DER CLIENT
+
 var socket = io.connect(window.location.href);
 
 var buttonstatus = false;

@@ -15,7 +15,7 @@ body {
     width: 100%;
     margin: 0;
     padding: 0;
-    
+
     background-color: #f8f8f8;
     transition: background-color 200ms ease-in;
 }
@@ -35,7 +35,7 @@ body.state-on {
 
 .container {
     height: 100%;
-    
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,14 +47,14 @@ body.state-on {
     background: #ccc;
     border-radius: 50%;
     box-shadow: 0 5px 0 0 #aaa;
-    
+
     width: 20vmin;
     height: 20vmin;
     min-width: 200px;
     min-height: 200px;
-    
+
     flex: 0;
-    
+
     transition: background-color 200ms ease-in, color 200ms ease-in, box-shadow 200ms ease-in;
 }
 
@@ -79,4 +79,8 @@ body.state-on #led-button:active {
 
 body.state-on #led-button:hover {
     background-color: #98ea69;
+}
+
+h1{
+  margin-top: 5rem;
 }

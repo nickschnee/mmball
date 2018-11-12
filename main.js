@@ -1,3 +1,10 @@
+// *INFO*
+
+// SERVERSEITIGES JS FILE
+// DER SERVER SCHICKT SENSORDATEN AN DEN CLIENT
+// DIESE DATEI AUSFÜHREN MIT DEM COMMAND sudo node main.js
+// index.html kann anschliessend über 172.20.10.X:3000 aufgerufen werden.
+
 // Server libraries
 var express = require('express');
 var app = express();

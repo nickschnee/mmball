@@ -7,9 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- shrink-to-fit=no -->
     <title>mmball.ch</title>
     <!--<link href="css/desktop_style.css" rel="stylesheet" type="text/css">
-    <link href="css/mobile_style.css" rel="stylesheet" type="text/css">
-    <link href="css/gameplay_style.css" rel="stylesheet" type="text/css"> -->
+    <link href="css/mobile_style.css" rel="stylesheet" type="text/css">-->
+    <link href="css/gameplay_style.css" rel="stylesheet" type="text/css"> 
     <link href="css/logo.css" rel="stylesheet" type="text/css">
+    <link href="css/index.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <!--Schriften-->
     <link href="https://fonts.googleapis.com/css?family=Chakra+Petch|Permanent+Marker|VT323" rel="stylesheet">
@@ -19,19 +21,31 @@
 </head>
 
 <body>
-<!-- Logo Titel --> 
+<!-- Logo Titel -->
     <div class="MMBall-logo">
     <p class="chrome">MM</p>
     <p class="dreams">Ball</p>
     </div>
-    
+
+<!-- HTML Content -->
+
+    <h1> <span id="gameinfo"> PUSH THE BUTTON WHEN YOU'RE READY </span></h1>
+
+    <progress value="0" max="10" id="progressBar"></progress>
+
+    <h1>Dein Punktestand: <span id="score"> 0 </span> </h1>
+<!-- HTML Content Ende -->
+
 <!-- Gridanimation -->
     <div class="grid"></div>
 
 <!-- Sterne -->
     <canvas id="canvas"></canvas>
-    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+    <script src="index.js"></script>
     <script src="js/canvas_app.js"></script>
+
 </body>
 
 </html>
