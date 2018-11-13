@@ -1,4 +1,4 @@
-// NICHT LÖSCHEN - WICHTIGES JS FILE, DARAUF BERUHT DER CLIENT
+// NICHT LÖSCHEN - WICHTIGES JS FILE, DAMIT FUNKTIONIERT DER GANZE CLIENT
 
 var socket = io.connect(window.location.href);
 
@@ -65,7 +65,7 @@ function game () {
           return;
         }
 
-      },60000);
+      },1000);
     };
 
   },1000);
