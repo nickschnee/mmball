@@ -22,7 +22,7 @@ socket.on('button-status', function(buttonstatus) {
 
 // Functions
 function game () {
-  var timeleft = 5;
+  var timeleft = 10;
   var downloadTimer = setInterval(function(){
     timeleft--;
     document.getElementById("gameinfo").textContent = "Game starting in " + timeleft + " Seconds";
