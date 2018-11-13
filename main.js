@@ -42,8 +42,16 @@ var gamerunning;
 
 // RASPBERRY BOARD
 board.on('ready', function () {
-  sensor1 = new five.Sensor.Digital('P1-11');
-  sensor2 = new five.Sensor.Digital('P1-7');
+  sensor1 = new five.Sensor.Digital({
+  pin: 'P1-11',
+  freq: 10,
+});
+
+  sensor2 = new five.Sensor.Digital({
+  pin: 'P1-7',
+  freq: 10,
+});
+
   button = new five.Button('P1-40')
 
   button.on("press", function() {
