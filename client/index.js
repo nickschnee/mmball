@@ -71,3 +71,12 @@ function game () {
   },1000);
 
 };
+
+
+// Document Ready
+$(document).ready(function(){
+    $('#singleplayerbutton').click(function(){
+        $('.playerButton').toggleClass("hidden");
+        $('.ingameelement').toggleClass("hidden");
+    });
+});

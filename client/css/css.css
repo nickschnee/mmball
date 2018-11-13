@@ -84,6 +84,8 @@ a:hover {color: #fffa00;}
 	font-size:20px;
 	padding:14px 47px;
 	text-decoration:none;
+
+  margin-top: 10rem;
 }
 .playerButton:hover {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #FF0092), color-stop(1, #7c2e8f));
@@ -98,4 +100,13 @@ a:hover {color: #fffa00;}
 .playerButton:active {
 	position:relative;
 	top:1px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.flexbox {
+  display: flex;
+  margin: auto;
 }

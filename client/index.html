@@ -10,7 +10,7 @@
   <link href="css/mobile_style.css" rel="stylesheet" type="text/css">-->
   <link href="css/gameplay_style.css" rel="stylesheet" type="text/css">
   <link href="css/logo.css" rel="stylesheet" type="text/css">
-  <link href="css/index.css" rel="stylesheet" type="text/css">
+  <link href="css/css.css" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <!--Schriften-->
@@ -28,77 +28,79 @@
   </div>
   <!-- ENDE Logo Titel -->
 
+  <div class="flexbox">
+    <a href="#" class="playerButton" id="singleplayerbutton">1 Spieler</a>
+    <a href="#" class="playerButton" id="multiplayerbutton">2 Spieler</a>
+  </div>
 
-  <a href="#" class="playerButton">1 Spieler</a>
-  <a href="#" class="playerButton">2 Spieler</a>
 
 
   <!-- InGame -->
-  <h1> <span id="gameinfo"> PUSH THE BUTTON WHEN YOU'RE READY </span></h1>
+  <h2 class="ingameelement hidden"> <span id="gameinfo"> PUSH THE BUTTON WHEN YOU'RE READY </span></h2>
 
-  <progress value="0" max="10" id="progressBar"></progress>
+  <progress class="ingameelement hidden" value="0" max="10" id="progressBar"></progress>
 
-  <h1>Dein Punktestand: <span id="score"> 0 </span> </h1>
+  <p class="ingameelement hidden">Dein Punktestand: <span id="score"> 0 </span> </p>
 
   <!-- ENDE InGame -->
 
 
   <!-- Scoreboard -->
   <!-- Overall Scores Titel und Tabelle -->
-  <div id="overall-scores" class="scores">
-      <h3>Overall Scores</h3>
-      <p>Hier siehst du die Bestenliste aller Zeiten</p>
-      <table>
-          <tr>
-              <th>Rang</th>
-              <th>Punkte</th>
-              <th>Name</th>
-          </tr>
-          <tr class="blink">
-              <td>1</td>
-              <td>10000</td>
-              <td>ScrappyCoco123</td>
-          </tr>
-          <tr>
-              <td>2</td>
-              <td>9999</td>
-              <td>huiiiiiBuuh</td>
-          </tr>
-          <tr>
-              <td>3</td>
-              <td>8888</td>
-              <td>DudesGrooves</td>
-          </tr>
-          <tr>
-              <td>4</td>
-              <td>6666</td>
-              <td>DerSpieler</td>
-          </tr>
-      </table>
+  <div id="overall-scores" class="scores hidden">
+    <h3>Overall Scores</h3>
+    <p>Hier siehst du die Bestenliste aller Zeiten</p>
+    <table>
+      <tr>
+        <th>Rang</th>
+        <th>Punkte</th>
+        <th>Name</th>
+      </tr>
+      <tr class="blink">
+        <td>1</td>
+        <td>10000</td>
+        <td>ScrappyCoco123</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>9999</td>
+        <td>huiiiiiBuuh</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>8888</td>
+        <td>DudesGrooves</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>6666</td>
+        <td>DerSpieler</td>
+      </tr>
+    </table>
   </div>
   <!-- ENDE Overall Scores Titel und Tabelle ENDE-->
 
   <!-- Scores Bern vs. Chur Tabelle -->
-  <div id="bern-vs-chur" class="scores">
-      <h3>Bern vs. Chur</h3>
-      <p>Hier siehst du ob Bern oder Chur vorne liegt</p>
-      <table>
-          <tr>
-              <th>Rang</th>
-              <th>Siege</th>
-              <th>Ort</th>
-          </tr>
-          <tr class="blink">
-              <td>1</td>
-              <td>365</td>
-              <td>Bern</td>
-          </tr>
-          <tr>
-              <td>2</td>
-              <td>214</td>
-              <td>Chur</td>
-          </tr>
-      </table>
+  <div id="bern-vs-chur" class="scores hidden">
+    <h3>Bern vs. Chur</h3>
+    <p>Hier siehst du ob Bern oder Chur vorne liegt</p>
+    <table>
+      <tr>
+        <th>Rang</th>
+        <th>Siege</th>
+        <th>Ort</th>
+      </tr>
+      <tr class="blink">
+        <td>1</td>
+        <td>365</td>
+        <td>Bern</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>214</td>
+        <td>Chur</td>
+      </tr>
+    </table>
   </div>
   <!-- ENDE Scores Bern vs. Chur Tabelle ENDE-->
   <!-- ENDE Scoreboard -->
