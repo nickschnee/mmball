@@ -42,6 +42,11 @@ table {
     margin-right: auto;
 }
 
+img {
+    max-width: 40vw;
+}
+
+
 #overall-scores {}
 
 #bern-vs-chur {}
