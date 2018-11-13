@@ -5,7 +5,6 @@ var socket = io.connect(window.location.href);
 var buttonstatus = false;
 var gamestart = false;
 var gamefinish = false;
-var score = 0;
 
 /*socket.on('sensor-status', function(data) {
 console.log("Ein Empfängnis! " + data);
@@ -14,7 +13,7 @@ document.getElementById("score").innerHTML = data;
 }); */
 
 socket.on('button-status', function(buttonstatus) {
-  console.log("Buttonstatus received " + buttonstatus);
+  console.log('Button Pressed, Game starting');
 
   // Countdown for Gamestart
   game();
@@ -41,16 +40,17 @@ function game () {
       console.log("Lasst die Spiele beginnen!");
       $("#gameinfo").remove();
 
-      socket.on('sensor1', function(data) {
-        console.log("Score Sensor 1");
-        score = score + 10;
+      // Receiving absolute score from server
+      // The score is pushed into HTML
+      socket.on('score', function(score) {
+        console.log(score);
         document.getElementById("score").innerHTML = score;
       });
 
-      socket.on('sensor2', function(data) {
-        console.log("Score Sensor 2");
-        score = score + 50;
-        document.getElementById("score").innerHTML = score;
+      // Receiving last goal data from server
+      // This can be used to show different score animations depending on which pipe was hit
+      socket.on('lastgoal', function(lastgoal) {
+        console.log("Der letzte Treffer gab " + lastgoal + " Punkte");
       });
 
       var lefttime = 60;
@@ -75,8 +75,8 @@ function game () {
 
 // Document Ready
 $(document).ready(function(){
-    $('#singleplayerbutton').click(function(){
-        $('.playerButton').toggleClass("hidden");
-        $('.ingameelement').toggleClass("hidden");
-    });
+  $('#singleplayerbutton').click(function(){
+    $('.playerButton').toggleClass("hidden");
+    $('.ingameelement').toggleClass("hidden");
+  });
 });

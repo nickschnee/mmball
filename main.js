@@ -31,75 +31,64 @@ app.get('/', function(req, res) {
 app.use(express.static(__dirname + '/client'));
 
 // Variables
-var led;
 var sensor1;
 var sensor2;
 var button;
 
 var brightness;
 var score = 0;
-var gamerunning;
+var gamerunning = false;
 
 // RASPBERRY BOARD
 board.on('ready', function () {
   sensor1 = new five.Sensor.Digital({
-  pin: 'P1-11',
-  freq: 10,
-});
+    pin: 'P1-11',
+    freq: 10,
+  });
 
   sensor2 = new five.Sensor.Digital({
-  pin: 'P1-7',
-  freq: 10,
-});
+    pin: 'P1-7',
+    freq: 10,
+  });
 
   button = new five.Button('P1-40')
 
   button.on("press", function() {
     console.log( "Button pressed" );
-    //io.emit('game-status', "THE GAME IS STARTING");
     io.emit('button-status', true);
   }); // Button endet Hier
 
-  function gameon(){
+  // Sensoren aktivieren
+  sensor1.on("change", function() {
+    brightness = this.value;
 
-    // Sensoren aktivieren
-    sensor1.on("change", function() {
-      brightness = this.value;
-      console.log("SCORE 1");
-      console.log(this.scaleTo(0, 100));
+    if (brightness == 0 && gamerunning){
+      console.log('SCORE IN PIPE A + 10 Points');
+      score = score + 10;
+      console.log(score);
+      io.emit('score', score);
+      io.emit('lastgoal', 10);
+    };
+  });
 
-      if (brightness == 0){
-        if (gamerunning){
-          io.emit('sensor1', true);
-        };
+  sensor2.on("change", function() {
+    brightness = this.value;
 
-      };
-    }); // ENDE SENSOR 1
-
-    sensor2.on("change", function() {
-      brightness = this.value;
-      console.log("SCORE 2");
-
-      if (brightness == 0){
-        if (gamerunning){
-          io.emit('sensor2', true);
-        };
-
-      };
-    }); // ENDE SENSOR 2
-
-  }; // ENDE Function GAMEON
+    if (brightness == 0 && gamerunning){
+      console.log('SCORE IN PIPE B + 25 Points');
+      score = score + 25;
+      console.log(score);
+      io.emit('score', score);
+      io.emit('lastgoal', 25);
+    };
+  });
 
   io.on('connection', function(socket) {
 
     socket.on('gamestart', function(gamestart){
       //console.log("Das funktioniert so toll!");
       gamerunning = !gamerunning;
-      if (gamerunning){
-        gameon();
-        console.log("Das Spiel läuft ");
-        console.log(gamerunning);
-      };
+
     }); // ENDE Function gamestart
   }); //ENDE IO CONNECTION
 }); // ENDE BOARD
