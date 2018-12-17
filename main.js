@@ -6,7 +6,7 @@
 // index.html kann anschliessend über 172.20.10.X:3000 aufgerufen werden.
 
 // Server libraries
-var express = require('express');  ssss
+var express = require('express');
 var app = express()
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -88,6 +88,7 @@ board.on('ready', function () {
     socket.on('gamestart', function(gamestart){
       //console.log("Das funktioniert so toll!");
       gamerunning = !gamerunning;
+      console.log("das game läuft:" + gamerunning);
 
     }); // ENDE Function gamestart
   }); //ENDE IO CONNECTION

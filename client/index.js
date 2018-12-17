@@ -53,15 +53,19 @@ function game () {
         console.log("Der letzte Treffer gab " + lastgoal + " Punkte");
       });
 
-      var lefttime = 60;
+      var lefttime = 10;
       var Timerdownload = setInterval(function(){
-        document.getElementById("progressBar").value = 60 - --lefttime;
+        document.getElementById("progressBar").value = 10 - --lefttime;
 
         if(lefttime <= 0){
           socket.emit('gamestart');
           clearInterval(Timerdownload);
           console.log("Game fertig.")
           gamefinish = true;
+          //window.location.href = 'http://www.google.com';
+          $('#overall-scores').toggleClass("hidden");
+          $('#ingame').toggleClass("hidden");
+
           return;
         }
 
@@ -83,7 +87,7 @@ $(document).ready(function(){
 
 // Change Buttons with arrow keys
 $('body').on('keydown', function(e) {
-  if (e.keyCode === 39 && $('#singleplayerbutton').is(':focus') || e.keyCode === 37 && $('#singleplayerbutton').is(':focus'))  { //right arrow
+  if (e.keyCode === 39 && $('#singleplayerbutton').is(':focus') || e.keyCode === 37 && $('#singleplayerbutton').is(':focus'))  {
     $('#multiplayerbutton').focus();
   } else if (e.keyCode === 37 && $('#multiplayerbutton').is(':focus') || e.keyCode === 39 && $('#multiplayerbutton').is(':focus')) {
     $('#singleplayerbutton').focus();
