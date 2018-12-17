@@ -7,7 +7,7 @@
 
 // Server libraries
 var express = require('express');  ssss
-var app = express();
+var app = express()
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 

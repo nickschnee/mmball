@@ -102,6 +102,18 @@ a:hover {color: #fffa00;}
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF0092', endColorstr='#7c2e8f',GradientType=0);
 	background-color:#FF0092;
 }
+
+.playerButton:focus {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #FF0092), color-stop(1, #7c2e8f));
+	background:-moz-linear-gradient(top, #FF0092 5%, #7c2e8f 100%);
+	background:-webkit-linear-gradient(top, #FF0092 5%, #7c2e8f 100%);
+	background:-o-linear-gradient(top, #FF0092 5%, #7c2e8f 100%);
+	background:-ms-linear-gradient(top, #FF0092 5%, #7c2e8f 100%);
+	background:linear-gradient(to bottom, #FF0092 5%, #7c2e8f 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF0092', endColorstr='#7c2e8f',GradientType=0);
+	background-color:#FF0092;
+}
+
 .playerButton:active {
 	position:relative;
 	top:1px;

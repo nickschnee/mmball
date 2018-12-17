@@ -80,3 +80,12 @@ $(document).ready(function(){
     $('.ingameelement').toggleClass("hidden");
   });
 });
+
+// Change Buttons with arrow keys
+$('body').on('keydown', function(e) {
+  if (e.keyCode === 39 && $('#singleplayerbutton').is(':focus') || e.keyCode === 37 && $('#singleplayerbutton').is(':focus'))  { //right arrow
+    $('#multiplayerbutton').focus();
+  } else if (e.keyCode === 37 && $('#multiplayerbutton').is(':focus') || e.keyCode === 39 && $('#multiplayerbutton').is(':focus')) {
+    $('#singleplayerbutton').focus();
+  }
+});
