@@ -2,6 +2,9 @@
 
 // SERVERSEITIGES JS FILE
 // DER SERVER SCHICKT SENSORDATEN AN DEN CLIENT
+
+// Mit Server verbinden: ssh pi@172.20.10.X
+// Passwort: 123456
 // DIESE DATEI AUSFÜHREN MIT DEM COMMAND sudo node main.js
 // index.html kann anschliessend über 172.20.10.X:3000 aufgerufen werden.
 
@@ -61,7 +64,7 @@ board.on('ready', function () {
       io.emit('button-status', true);
       countdownstarted = true;
     }
-    
+
   }); // Button endet Hier
 
   // Sensoren aktivieren
