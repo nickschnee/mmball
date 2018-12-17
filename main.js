@@ -38,6 +38,7 @@ var button;
 var brightness;
 var score = 0;
 var gamerunning = false;
+var countdownstarted = false;
 
 // RASPBERRY BOARD
 board.on('ready', function () {
@@ -55,7 +56,12 @@ board.on('ready', function () {
 
   button.on("press", function() {
     console.log( "Button pressed" );
-    io.emit('button-status', true);
+
+    if(!countdownstarted){
+      io.emit('button-status', true);
+      countdownstarted = true;
+    }
+    
   }); // Button endet Hier
 
   // Sensoren aktivieren
@@ -87,7 +93,7 @@ board.on('ready', function () {
 
     socket.on('gamestart', function(gamestart){
       //console.log("Das funktioniert so toll!");
-      gamerunning = !gamerunning;
+      gamerunning = gamestart;
       console.log("das game läuft:" + gamerunning);
 
     }); // ENDE Function gamestart
