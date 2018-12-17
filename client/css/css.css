@@ -112,6 +112,7 @@ a:hover {color: #fffa00;}
 	background:linear-gradient(to bottom, #FF0092 5%, #7c2e8f 100%);
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF0092', endColorstr='#7c2e8f',GradientType=0);
 	background-color:#FF0092;
+	
 }
 
 .playerButton:active {
