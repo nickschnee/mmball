@@ -9,10 +9,10 @@
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <style type="text/css">
-    #contacts p,
-    #contacts p.lead{
-      margin: 0;
-    }
+  #contacts p,
+  #contacts p.lead{
+    margin: 0;
+  }
   </style>
 </head>
 <body>
@@ -24,7 +24,11 @@
     <p>Name</p>
     <input id="player" type="text" name="" value="">
 
-     <button onclick="writeScore()" type="button">Abschicken</button> 
+    <button onclick="writeScore()" type="button">Abschicken</button>
+
+    <ul id="players" class="list-group">
+      <!-- Contact Object li.list-group-item.contact will be added here by js -->
+    </ul>
 
   </div>
 
