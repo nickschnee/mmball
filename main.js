@@ -27,7 +27,8 @@ console.log('Access client screen on <IP>:3000');
 
 app.get('/', function(req, res) {
   // Join all arguments together and normalize the resulting path.
-  res.sendFile(__dirname + '/client/index.html');
+  //res.sendFile(__dirname + '/client/index.html');
+  res.sendFile(__dirname + '/client/firebase.html');
 });
 
 // Add static files files in client folder
