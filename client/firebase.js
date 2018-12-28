@@ -1,11 +1,11 @@
 // Initialize Firebase
 var config = {
-  apiKey: "AIzaSyCYhBFX8j5fBbdgeGqu5IuQAiSiswyIxcM",
-  authDomain: "mmball-6c217.firebaseapp.com",
-  databaseURL: "https://mmball-6c217.firebaseio.com",
-  projectId: "mmball-6c217",
-  storageBucket: "",
-  messagingSenderId: "1011219128121"
+  apiKey: "AIzaSyCfolxrOcBrgxVXKiBmdRbwakCNsw-kHbQ",
+  authDomain: "tempone-7869c.firebaseapp.com",
+  databaseURL: "https://tempone-7869c.firebaseio.com",
+  projectId: "tempone-7869c",
+  storageBucket: "tempone-7869c.appspot.com",
+  messagingSenderId: "557485542616"
 };
 firebase.initializeApp(config);
 
