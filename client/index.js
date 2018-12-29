@@ -5,6 +5,10 @@ var socket = io.connect(window.location.href);
 var buttonstatus = false;
 var gamestart = false;
 var gamefinish = false;
+var endScore = 0;
+
+var leaderboard = 0;
+var rank;
 
 /*socket.on('sensor-status', function(data) {
 console.log("Ein Empfängnis! " + data);
@@ -15,8 +19,8 @@ document.getElementById("score").innerHTML = data;
 socket.on('button-status', function(buttonstatus) {
   console.log('Button Pressed, Game starting');
 
-    // Countdown for Gamestart
-    gameintro();
+  // Countdown for Gamestart
+  gameintro();
 
 });
 
@@ -51,6 +55,7 @@ function play(){
   socket.on('score', function(score) {
     console.log(score);
     document.getElementById("score").innerHTML = score;
+    endScore = score;
   });
 
   // Receiving last goal data from server
@@ -69,8 +74,12 @@ function play(){
       console.log("Game fertig.")
       gamefinish = true;
       //window.location.href = 'http://www.google.com';
-      $('#overall-scores').toggleClass("hidden");
+      $('#scoreboard').toggleClass("hidden");
       $('#ingame').toggleClass("hidden");
+
+      $("#myscore").html(endscore);
+
+      console.log(endScore);
 
       return;
     }
@@ -95,3 +104,108 @@ $('body').on('keydown', function(e) {
     $('#singleplayerbutton').focus();
   }
 });
+
+
+
+
+
+
+//FIREBASE
+//FIREBASE
+//FIREBASE
+//FIREBASE
+//FIREBASE
+
+
+
+// Variables for testing only, delete when playing!
+// Variables for testing only, delete when playing!
+// Variables for testing only, delete when playing!
+
+endscore = 735;
+
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyCYhBFX8j5fBbdgeGqu5IuQAiSiswyIxcM",
+  authDomain: "mmball-6c217.firebaseapp.com",
+  databaseURL: "https://mmball-6c217.firebaseio.com/",
+  projectId: "mmball-6c217",
+  storageBucket: "mmball-6c217.appspot.com",
+  messagingSenderId: "1011219128121"
+};
+firebase.initializeApp(config);
+
+//Create firebase database reference
+var dbRef = firebase.database();
+var playersRef = dbRef.ref('players/');
+
+generateleaderboard();
+getrank(endscore);
+
+function generateleaderboard(){
+
+  // Generate HTML, listen for input, add that last entry to HTML
+  playersRef.orderByChild("score").limitToLast(5).on("child_added", function(snapshot) {
+
+    document.querySelector('#players').innerHTML += playerHtmlFromObject(snapshot.val());
+  });
+};
+
+function getrank(endscore){
+  var rankref = firebase.database().ref("players").orderByChild("score").startAt(endscore);
+  rankref.once("value")
+  .then(function(snapshot) {
+    rank = snapshot.numChildren() + 1;
+
+    $("#rank").html(rank );
+    $("#myscore").html(endscore);
+
+  });
+};
+
+
+// Wenn auf den Button gedrückt wird, Score eintragen.
+function writeScore(){
+
+  console.log("Inserted Player!")
+  playersRef.push({
+    name: $('#player').val(),
+    score: endScore,
+    location: 'Bern',
+    timestamp: 123456789
+  });
+
+};
+
+// Generate HTML
+function playerHtmlFromObject(player){
+  //console.log(contact);
+  var html = '';
+  html += '<li class="">';
+  html += '<div>';
+  html += '<p class="">'+player.name+'</p>';
+  html += '<p>'+player.score+'</p>';
+  html += '<p>'+player.location+'</p>';
+  //html += '<p>'+player.timestamp+'</p>';
+  html += '</div>';
+  html += '</li>';
+  return html;
+}
+
+/*leaderboardPosition();
+
+// Get your position in the leaderboard by counting how many scores there are
+function leaderboardPosition(endscore){
+
+var query = firebase.database().ref("players").orderByChild("score").startAt(endscore);
+query.once("value")
+.then(function(snapshot) {
+snapshot.forEach(function(childSnapshot) {
+
+leaderboard = leaderboard + 1;
+
+//console.log(leaderboard);
+
+});
+});
+};*/
