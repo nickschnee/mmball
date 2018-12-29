@@ -5,7 +5,7 @@ var socket = io.connect(window.location.href);
 var buttonstatus = false;
 var gamestart = false;
 var gamefinish = false;
-var endScore = 0;
+var endScore = 999;
 
 var leaderboard = 0;
 var rank;
@@ -110,19 +110,15 @@ $('body').on('keydown', function(e) {
 
 
 
+
+
 //FIREBASE
 //FIREBASE
 //FIREBASE
 //FIREBASE
 //FIREBASE
 
-
-
-// Variables for testing only, delete when playing!
-// Variables for testing only, delete when playing!
-// Variables for testing only, delete when playing!
-
-endscore = 735;
+endscore = 999;
 
 // Initialize Firebase
 var config = {
@@ -144,11 +140,19 @@ getrank(endscore);
 
 function generateleaderboard(){
 
-  // Generate HTML, listen for input, add that last entry to HTML
-  playersRef.orderByChild("score").limitToLast(5).on("child_added", function(snapshot) {
+playersRef.once('value').then(function(snapshot) {
+  var query = playersRef.orderByChild("invertedscore").limitToFirst(5);
+  query.once("value")
+  .then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
 
-    document.querySelector('#players').innerHTML += playerHtmlFromObject(snapshot.val());
+      document.querySelector('#players').innerHTML += playerHtmlFromObject(childSnapshot.val());
+
+    });
   });
+
+});
+
 };
 
 function getrank(endscore){
@@ -171,6 +175,7 @@ function writeScore(){
   playersRef.push({
     name: $('#player').val(),
     score: endScore,
+    invertedscore: - endScore,
     location: 'Bern',
     timestamp: 123456789
   });
@@ -192,20 +197,25 @@ function playerHtmlFromObject(player){
   return html;
 }
 
-/*leaderboardPosition();
+leaderboardPosition();
 
 // Get your position in the leaderboard by counting how many scores there are
 function leaderboardPosition(endscore){
 
-var query = firebase.database().ref("players").orderByChild("score").startAt(endscore);
-query.once("value")
-.then(function(snapshot) {
-snapshot.forEach(function(childSnapshot) {
+  var query = firebase.database().ref("players").orderByChild("score").startAt(endscore);
+  query.once("value")
+  .then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
 
-leaderboard = leaderboard + 1;
+      //console.log(leaderboard);
 
-//console.log(leaderboard);
+    });
+  });
+};
 
+/*
+// Generate HTML, listen for input, add that last entry to HTML
+playersRef.orderByChild("invertedscore").limitToFirst(5).on("child_added", function(snapshot) {
+document.querySelector('#players').innerHTML += playerHtmlFromObject(snapshot.val());
 });
-});
-};*/
+*/
