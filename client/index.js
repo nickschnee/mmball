@@ -5,10 +5,12 @@ var socket = io.connect(window.location.href);
 var buttonstatus = false;
 var gamestart = false;
 var gamefinish = false;
-var endScore = 999;
+var endScore = 150;
 
 var leaderboard = 0;
-var rank;
+var myrank;
+var timestamp = new Date().getTime() / 1000;
+
 
 /*socket.on('sensor-status', function(data) {
 console.log("Ein Empfängnis! " + data);
@@ -118,7 +120,7 @@ $('body').on('keydown', function(e) {
 //FIREBASE
 //FIREBASE
 
-endscore = 999;
+endscore = 150;
 
 // Initialize Firebase
 var config = {
@@ -135,33 +137,67 @@ firebase.initializeApp(config);
 var dbRef = firebase.database();
 var playersRef = dbRef.ref('players/');
 
-generateleaderboard();
 getrank(endscore);
+generateleaderboard();
+
+// timeout is needed because the function getrank needs time to assign the result to variable.
+setTimeout(function afterTwoSeconds() {
+  console.log(myrank);
+}, 1000)
 
 function generateleaderboard(){
 
-playersRef.once('value').then(function(snapshot) {
-  var query = playersRef.orderByChild("invertedscore").limitToFirst(5);
-  query.once("value")
-  .then(function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
+  // First delete old leaderboard if it exists.
+  $( ".listentry" ).remove();
 
-      document.querySelector('#players').innerHTML += playerHtmlFromObject(childSnapshot.val());
+  // Then generate new leaderboard
+  playersRef.once('value').then(function(snapshot) {
+    var query = playersRef.orderByChild("invertedscore").limitToFirst(5);
+    query.once("value")
+    .then(function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
 
+        document.querySelector('#players').innerHTML += playerHtmlFromObject(childSnapshot.val());
+
+      });
     });
   });
+};
 
-});
+function generateleaderboardchur(){
 
+  // First delete old leaderboard if it exists.
+  $( ".listentry" ).remove();
+
+  // Then generate new leaderboard
+  playersRef.once('value').then(function(snapshot) {
+    var query = playersRef.orderByChild("invertedscore");
+    query.once("value")
+    .then(function(snapshot) {
+
+      var i = 1; // counter
+      snapshot.forEach(function(childSnapshot) {
+      //console.log(i);
+
+        var entry = childSnapshot.val();
+        if (entry.location == 'Chur' && i <= 10) {
+
+          document.querySelector('#players').innerHTML += playerHtmlFromObject(childSnapshot.val());
+          i++;
+
+        };
+      });
+    });
+  });
 };
 
 function getrank(endscore){
   var rankref = firebase.database().ref("players").orderByChild("score").startAt(endscore);
   rankref.once("value")
   .then(function(snapshot) {
-    rank = snapshot.numChildren() + 1;
+    myrank = snapshot.numChildren() + 1;
 
-    $("#rank").html(rank );
+    $("#rank").html(myrank);
     $("#myscore").html(endscore);
 
   });
@@ -170,15 +206,16 @@ function getrank(endscore){
 
 // Wenn auf den Button gedrückt wird, Score eintragen.
 function writeScore(){
-
   console.log("Inserted Player!")
   playersRef.push({
     name: $('#player').val(),
     score: endScore,
     invertedscore: - endScore,
     location: 'Bern',
-    timestamp: 123456789
+    timestamp: timestamp
   });
+
+  generateleaderboard();
 
 };
 
@@ -186,7 +223,7 @@ function writeScore(){
 function playerHtmlFromObject(player){
   //console.log(contact);
   var html = '';
-  html += '<li class="">';
+  html += '<li class="listentry">';
   html += '<div>';
   html += '<p class="">'+player.name+'</p>';
   html += '<p>'+player.score+'</p>';
@@ -197,21 +234,23 @@ function playerHtmlFromObject(player){
   return html;
 }
 
+/*
 leaderboardPosition();
 
 // Get your position in the leaderboard by counting how many scores there are
 function leaderboardPosition(endscore){
 
-  var query = firebase.database().ref("players").orderByChild("score").startAt(endscore);
-  query.once("value")
-  .then(function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
+var query = firebase.database().ref("players").orderByChild("score").startAt(endscore);
+query.once("value")
+.then(function(snapshot) {
+snapshot.forEach(function(childSnapshot) {
 
-      //console.log(leaderboard);
+//console.log(leaderboard);
 
-    });
-  });
+});
+});
 };
+*/
 
 /*
 // Generate HTML, listen for input, add that last entry to HTML
