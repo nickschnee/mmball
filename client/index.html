@@ -28,7 +28,7 @@
   </div>
   <!-- ENDE Logo Titel -->
 
-  <div id="ingame" class="">
+  <div id="ingame" class="hidden">
 
     <div class="flexbox">
       <button autofocus type="button" class="playerButton" id="singleplayerbutton">1 Spieler</button>
@@ -51,19 +51,29 @@
 
   <div id="scoreboard" class="">
 
-    <p>Name</p>
     <input id="player" type="text" name="" value="">
 
-    <button onclick="writeScore()" type="button">Score eintragen!</button>
+    <button class="" onclick="writeScore()" type="button">Score eintragen!</button>
 
-    <button onclick="generateleaderboardchur()" type="button">Chur anzeigen</button>
+    <button class="" onclick="generateleaderboardchur()" type="button">Leaderboard Chur</button>
+
+    <button class="" onclick="generateleaderboardbern()" type="button">leaderboard Bern</button>
+
+    <div class="leaderboard">
+
+      <table id="players">
+        <tr>
+          <th>Score</th>
+          <th>Name</th>
+          <th>Location</th>
+        </tr>
+
+      </table>
 
 
-    <div class="highscoreboard">
-
-      <ol id="players" class="list-group">
+      <!-- <ol id="players" class="list-group"> -->
         <!-- Contact Object li.list-group-item.contact will be added here by js -->
-      </ol>
+      <!-- </ol> -->
 
     </div>
 

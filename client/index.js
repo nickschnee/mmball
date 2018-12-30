@@ -139,6 +139,7 @@ var playersRef = dbRef.ref('players/');
 
 getrank(endscore);
 generateleaderboard();
+//generatetable();
 
 // timeout is needed because the function getrank needs time to assign the result to variable.
 setTimeout(function afterTwoSeconds() {
@@ -157,7 +158,9 @@ function generateleaderboard(){
     .then(function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
 
-        document.querySelector('#players').innerHTML += playerHtmlFromObject(childSnapshot.val());
+        //document.querySelector('#players').innerHTML += playerHtmlFromObject(childSnapshot.val());
+        var myhtml = playerHtmlFromObject(childSnapshot.val());
+        $("#players").append(myhtml);
 
       });
     });
@@ -177,10 +180,37 @@ function generateleaderboardchur(){
 
       var i = 1; // counter
       snapshot.forEach(function(childSnapshot) {
-      //console.log(i);
+        //console.log(i);
 
         var entry = childSnapshot.val();
         if (entry.location == 'Chur' && i <= 10) {
+
+          document.querySelector('#players').innerHTML += playerHtmlFromObject(childSnapshot.val());
+          i++;
+
+        };
+      });
+    });
+  });
+};
+
+function generateleaderboardbern(){
+
+  // First delete old leaderboard if it exists.
+  $( ".listentry" ).remove();
+
+  // Then generate new leaderboard
+  playersRef.once('value').then(function(snapshot) {
+    var query = playersRef.orderByChild("invertedscore");
+    query.once("value")
+    .then(function(snapshot) {
+
+      var i = 1; // counter
+      snapshot.forEach(function(childSnapshot) {
+        //console.log(i);
+
+        var entry = childSnapshot.val();
+        if (entry.location == 'Bern' && i <= 10) {
 
           document.querySelector('#players').innerHTML += playerHtmlFromObject(childSnapshot.val());
           i++;
@@ -221,17 +251,15 @@ function writeScore(){
 
 // Generate HTML
 function playerHtmlFromObject(player){
-  //console.log(contact);
   var html = '';
-  html += '<li class="listentry">';
-  html += '<div>';
-  html += '<p class="">'+player.name+'</p>';
-  html += '<p>'+player.score+'</p>';
-  html += '<p>'+player.location+'</p>';
+  html += '<tr>';
+  html += '<td class="text-leaderboard">'+player.score+'</td>';
+  html += '<td class="text-leaderboard">'+player.name+'</td>';
+  html += '<td class="text-leaderboard">'+player.location+'</td>';
   //html += '<p>'+player.timestamp+'</p>';
-  html += '</div>';
-  html += '</li>';
+  html += '</tr>';
   return html;
+
 }
 
 /*

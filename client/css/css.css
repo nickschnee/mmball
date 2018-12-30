@@ -30,6 +30,11 @@ p {
   font-size: 300%;
 }
 
+.text-leaderboard{
+  font-size: 100%;
+  margin-right: 10px;
+}
+
 div {
   margin-left: auto;
   margin-right: auto;
@@ -37,9 +42,17 @@ div {
 
 table {
   font-size: 200%;
-  text-align: right;
+  text-align: left;
   margin-left: auto;
   margin-right: auto;
+
+  table-layout: auto;
+  width: 100%
+  ;
+}
+
+th{
+  text-shadow: -1px 0 #fffa00, 0 1px #fffa00, 1px 0 #fffa00, 0 -1px #fffa00;
 }
 
 img {
