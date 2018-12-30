@@ -5,7 +5,7 @@ var socket = io.connect(window.location.href);
 var buttonstatus = false;
 var gamestart = false;
 var gamefinish = false;
-var endScore = 130;
+var endScore = 200;
 
 var myrank; // my rank in the current game
 var timestamp = new Date().getTime() / 1000; // generates timestamp for database
@@ -126,7 +126,7 @@ $('table').on("change keyup", function(e) {
 //FIREBASE
 //FIREBASE
 
-endscore = 130;
+endscore = 200;
 
 // Initialize Firebase
 var config = {
@@ -150,7 +150,6 @@ setTimeout(function(){
   if (myrank > 10 || alreadyinserted){
     generateleaderboard();
   } else {
-    console.log ("YOU WON");
     generatewinnerboard();
 
   }
@@ -179,64 +178,69 @@ function generatewinnerboard(){
   $( ".tablerow" ).remove();
   $( ".myrow" ).remove();
 
-  // Then generate new leaderboard
-  playersRef.once('value').then(function(snapshot) {
+  if (myrank == 1){
+    console.log("Du Gewinnertyp!")
 
-    // write entrys before my rank
-    var query = playersRef.orderByChild("invertedscore").limitToFirst((myrank-1));
+  } else {
 
-    // get to know last known key and make array
-    query.once('value', function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
-        lastKnownKey = childSnapshot.key;
-        keyarray.push(lastKnownKey);
-        console.log(keyarray)
+    // Then generate new leaderboard
+    playersRef.once('value').then(function(snapshot) {
+
+      // write entrys before my rank
+      var query = playersRef.orderByChild("invertedscore").limitToFirst((myrank-1));
+
+      // get to know last known key and make array
+      query.once('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          lastKnownKey = childSnapshot.key;
+          keyarray.push(lastKnownKey);
+          console.log(keyarray)
+        });
       });
-    });
 
-    query.once("value")
-    .then(function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
+      query.once("value")
+      .then(function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
 
-        // Generate Entrys before my rank
-        var myhtml = playerHtmlFromObject(childSnapshot.val());
+          // Generate Entrys before my rank
+          var myhtml = playerHtmlFromObject(childSnapshot.val());
+          $("#players").append(myhtml);
+
+        });
+
+
+        // generate myrank
+        var myhtml = myHtml();
         $("#players").append(myhtml);
+        console.log(lastKnownScore);
 
-      });
+        absoluterank++;
 
-      // generate myrank
-      var myhtml = myHtml();
-      $("#players").append(myhtml);
-      console.log(lastKnownScore);
+        // generate ranks after myrank
+        playersRef.once('value').then(function(snapshot) {
 
-      absoluterank++;
+          //var query = playersRef.orderByChild("invertedscore").startAt(-lastKnownScore).limitToFirst(11 - (myrank-1));;
+          var secondquery = playersRef.orderByChild("invertedscore").limitToFirst(9);
+          secondquery.once("value")
+          .then(function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
 
-      // generate ranks after myrank
-      playersRef.once('value').then(function(snapshot) {
+              var key = childSnapshot.key;
+              var includeskey = keyarray.includes(key);
+              console.log(includeskey);
+              //console.log(status);
+              if (includeskey == false) {
 
-        //var query = playersRef.orderByChild("invertedscore").startAt(-lastKnownScore).limitToFirst(11 - (myrank-1));;
-        var secondquery = playersRef.orderByChild("invertedscore").limitToFirst(9);
-        secondquery.once("value")
-        .then(function(snapshot) {
-          snapshot.forEach(function(childSnapshot) {
+                var myhtml = playerHtmlFromObject(childSnapshot.val());
+                $("#players").append(myhtml);
 
-          var key = childSnapshot.key;
-          var includeskey = keyarray.includes(key);
-          console.log(includeskey);
-          //console.log(status);
-          if (includeskey == false) {
-
-            var myhtml = playerHtmlFromObject(childSnapshot.val());
-            $("#players").append(myhtml);
-
-          };
-
-
+              };
+            });
+          });
         });
       });
     });
-  });
-});
+  };
 };
 
 function generateleaderboard(){
