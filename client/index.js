@@ -5,12 +5,15 @@ var socket = io.connect(window.location.href);
 var buttonstatus = false;
 var gamestart = false;
 var gamefinish = false;
-var endScore = 1225;
+var endScore = 78;
 
 var myrank; // my rank in the current game
 var timestamp = new Date().getTime() / 1000; // generates timestamp for database
 var absoluterank = 0; // numerates ranks from 1 to 10. Is reset upon reaching 10.
 var alreadyinserted = false; // checks if player has already been inserted to database
+var lastKnownScore;
+var lastKnownKey;
+var keyarray = [];
 
 
 /*socket.on('sensor-status', function(data) {
@@ -104,6 +107,7 @@ $('body').on('keydown', function(e) {
   }
 });
 
+// Write Player to Database when pressing Enter on Input field
 $('table').on("change keyup", function(e) {
   console.log("Input detected!")
   if (e.keyCode === 13)  {
@@ -123,7 +127,7 @@ $('table').on("change keyup", function(e) {
 //FIREBASE
 //FIREBASE
 
-endscore = 1225;
+endscore = 78;
 
 // Initialize Firebase
 var config = {
@@ -141,7 +145,110 @@ var dbRef = firebase.database();
 var playersRef = dbRef.ref('players/');
 
 getrank(endscore);
-generateleaderboard();
+
+setTimeout(function(){
+
+  if (myrank > 10 || alreadyinserted){
+    generateleaderboard();
+  } else {
+    console.log ("YOU WON");
+    generatewinnerboard();
+
+  }
+
+}, 1000);
+
+
+
+
+
+
+
+// Functions
+// Functions
+// Functions
+// Functions
+// Functions
+// Functions
+// Functions
+// Functions
+function generatewinnerboard(){
+
+  absoluterank = 0;
+
+  // First delete old leaderboard if it exists.
+  $( ".tablerow" ).remove();
+  $( ".myrow" ).remove();
+
+  // Then generate new leaderboard
+  playersRef.once('value').then(function(snapshot) {
+
+    // write entrys before my rank
+    var query = playersRef.orderByChild("invertedscore").limitToFirst((myrank-1));
+
+    // get to know last known key
+    query.once('value', function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        lastKnownKey = childSnapshot.key;
+        keyarray.push(lastKnownKey);
+        //console.log(lastKnownKey);
+        console.log(keyarray)
+      });
+    });
+
+    query.once("value")
+    .then(function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+
+        // Generate Entrys before my rank
+        var myhtml = playerHtmlFromObject(childSnapshot.val());
+        $("#players").append(myhtml);
+
+      });
+
+      // generate myrank
+      var myhtml = myHtml();
+      $("#players").append(myhtml);
+      console.log(lastKnownScore);
+
+      // generate ranks after myrank
+      playersRef.once('value').then(function(snapshot) {
+
+        // write entrys after my rank
+        //var query = playersRef.orderByChild("invertedscore").startAt(-lastKnownScore).limitToFirst(11 - (myrank-1));;
+        var query = playersRef.orderByChild("invertedscore").limitToFirst(10);;
+        query.once("value")
+        .then(function(snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+
+
+          /*var entry = childSnapshot.key;
+          console.log(entry);
+          if (entry != lastKnownKey) {
+
+            var myhtml = playerHtmlFromObject(childSnapshot.val());
+            $("#players").append(myhtml);
+
+          };*/
+
+
+          var entry = childSnapshot.key;
+          var includeskey = keyarray.includes(entry);
+          console.log(status);
+          if (includeskey = false) {
+
+            var myhtml = playerHtmlFromObject(childSnapshot.val());
+            $("#players").append(myhtml);
+
+          };
+
+
+        });
+      });
+    });
+  });
+});
+};
 
 function generateleaderboard(){
 
@@ -216,6 +323,10 @@ function playerHtmlFromObject(player){
   if (absoluterank >= 10){
     absoluterank = 0;
   }
+
+  lastKnownScore = player.score;
+  //console.log(lastKnownScore);
+
 
   return html;
 
