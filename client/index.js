@@ -5,7 +5,7 @@ var socket = io.connect(window.location.href);
 var buttonstatus = false;
 var gamestart = false;
 var gamefinish = false;
-var endScore = 78;
+var endScore = 130;
 
 var myrank; // my rank in the current game
 var timestamp = new Date().getTime() / 1000; // generates timestamp for database
@@ -14,7 +14,6 @@ var alreadyinserted = false; // checks if player has already been inserted to da
 var lastKnownScore;
 var lastKnownKey;
 var keyarray = [];
-
 
 /*socket.on('sensor-status', function(data) {
 console.log("Ein Empfängnis! " + data);
@@ -127,7 +126,7 @@ $('table').on("change keyup", function(e) {
 //FIREBASE
 //FIREBASE
 
-endscore = 78;
+endscore = 130;
 
 // Initialize Firebase
 var config = {
@@ -186,12 +185,11 @@ function generatewinnerboard(){
     // write entrys before my rank
     var query = playersRef.orderByChild("invertedscore").limitToFirst((myrank-1));
 
-    // get to know last known key
+    // get to know last known key and make array
     query.once('value', function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
         lastKnownKey = childSnapshot.key;
         keyarray.push(lastKnownKey);
-        //console.log(lastKnownKey);
         console.log(keyarray)
       });
     });
@@ -211,31 +209,22 @@ function generatewinnerboard(){
       $("#players").append(myhtml);
       console.log(lastKnownScore);
 
+      absoluterank++;
+
       // generate ranks after myrank
       playersRef.once('value').then(function(snapshot) {
 
-        // write entrys after my rank
         //var query = playersRef.orderByChild("invertedscore").startAt(-lastKnownScore).limitToFirst(11 - (myrank-1));;
-        var query = playersRef.orderByChild("invertedscore").limitToFirst(10);;
-        query.once("value")
+        var secondquery = playersRef.orderByChild("invertedscore").limitToFirst(9);
+        secondquery.once("value")
         .then(function(snapshot) {
           snapshot.forEach(function(childSnapshot) {
 
-
-          /*var entry = childSnapshot.key;
-          console.log(entry);
-          if (entry != lastKnownKey) {
-
-            var myhtml = playerHtmlFromObject(childSnapshot.val());
-            $("#players").append(myhtml);
-
-          };*/
-
-
-          var entry = childSnapshot.key;
-          var includeskey = keyarray.includes(entry);
-          console.log(status);
-          if (includeskey = false) {
+          var key = childSnapshot.key;
+          var includeskey = keyarray.includes(key);
+          console.log(includeskey);
+          //console.log(status);
+          if (includeskey == false) {
 
             var myhtml = playerHtmlFromObject(childSnapshot.val());
             $("#players").append(myhtml);
