@@ -5,11 +5,12 @@ var socket = io.connect(window.location.href);
 var buttonstatus = false;
 var gamestart = false;
 var gamefinish = false;
-var endScore = 150;
+var endScore = 8000;
 
 var leaderboard = 0;
 var myrank;
 var timestamp = new Date().getTime() / 1000;
+var absoluterank = 0;
 
 
 /*socket.on('sensor-status', function(data) {
@@ -120,7 +121,7 @@ $('body').on('keydown', function(e) {
 //FIREBASE
 //FIREBASE
 
-endscore = 150;
+endscore = 8000;
 
 // Initialize Firebase
 var config = {
@@ -141,24 +142,20 @@ getrank(endscore);
 generateleaderboard();
 //generatetable();
 
-// timeout is needed because the function getrank needs time to assign the result to variable.
-setTimeout(function afterTwoSeconds() {
-  console.log(myrank);
-}, 1000)
-
 function generateleaderboard(){
 
+  absoluterank = 0;
+
   // First delete old leaderboard if it exists.
-  $( ".listentry" ).remove();
+  $( ".tablerow" ).remove();
 
   // Then generate new leaderboard
   playersRef.once('value').then(function(snapshot) {
-    var query = playersRef.orderByChild("invertedscore").limitToFirst(5);
+    var query = playersRef.orderByChild("invertedscore").limitToFirst(10);
     query.once("value")
     .then(function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
 
-        //document.querySelector('#players').innerHTML += playerHtmlFromObject(childSnapshot.val());
         var myhtml = playerHtmlFromObject(childSnapshot.val());
         $("#players").append(myhtml);
 
@@ -169,8 +166,10 @@ function generateleaderboard(){
 
 function generateleaderboardchur(){
 
+  absoluterank = 0;
+
   // First delete old leaderboard if it exists.
-  $( ".listentry" ).remove();
+  $( ".tablerow" ).remove();
 
   // Then generate new leaderboard
   playersRef.once('value').then(function(snapshot) {
@@ -196,8 +195,10 @@ function generateleaderboardchur(){
 
 function generateleaderboardbern(){
 
+  absoluterank = 0;
+
   // First delete old leaderboard if it exists.
-  $( ".listentry" ).remove();
+  $( ".tablerow" ).remove();
 
   // Then generate new leaderboard
   playersRef.once('value').then(function(snapshot) {
@@ -251,13 +252,23 @@ function writeScore(){
 
 // Generate HTML
 function playerHtmlFromObject(player){
+
+  absoluterank++
+  console.log(absoluterank);
+
   var html = '';
-  html += '<tr>';
+  html += '<tr class="tablerow">';
+  html += '<td class="text-leaderboard">' + absoluterank + '.</td>';
   html += '<td class="text-leaderboard">'+player.score+'</td>';
   html += '<td class="text-leaderboard">'+player.name+'</td>';
   html += '<td class="text-leaderboard">'+player.location+'</td>';
   //html += '<p>'+player.timestamp+'</p>';
   html += '</tr>';
+
+  if (absoluterank >= 10){
+    absoluterank = 0;
+  }
+
   return html;
 
 }
