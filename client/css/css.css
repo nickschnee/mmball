@@ -55,6 +55,10 @@ th{
   text-shadow: -1px 0 #fffa00, 0 1px #fffa00, 1px 0 #fffa00, 0 -1px #fffa00;
 }
 
+.myrow{
+  text-shadow: -1px 0 #fffa00, 0 1px #fffa00, 1px 0 #fffa00, 0 -1px #fffa00;
+}
+
 img {
   max-width: 40vw;
 }
@@ -104,7 +108,10 @@ img {
       text-decoration:none;
 
       margin-top: 10rem;
+      margin-bottom: 3rem;
     }
+
+
     .playerButton:hover {
       background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #FF0092), color-stop(1, #7c2e8f));
       background:-moz-linear-gradient(top, #FF0092 5%, #7c2e8f 100%);
@@ -140,4 +147,22 @@ img {
     .flexbox {
       display: flex;
       margin: auto;
+    }
+
+    #playerinput {
+      background: transparent;
+      border: none;
+      font-family: 'VT323', monospace;
+      font-size: 100%;
+      color: #FF0092;
+      text-shadow: -1px 0 #fffa00, 0 1px #fffa00, 1px 0 #fffa00, 0 -1px #fffa00;
+    }
+
+    ::placeholder {
+      color: #FF0092;
+      opacity: 0.8; /* Firefox */
+      text-shadow: -1px 0 #fffa00, 0 1px #fffa00, 1px 0 #fffa00, 0 -1px #fffa00;
+
+      animation: blinkingText 0.8s infinite;
+
     }

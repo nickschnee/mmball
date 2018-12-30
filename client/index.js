@@ -5,12 +5,12 @@ var socket = io.connect(window.location.href);
 var buttonstatus = false;
 var gamestart = false;
 var gamefinish = false;
-var endScore = 8000;
+var endScore = 1225;
 
-var leaderboard = 0;
-var myrank;
-var timestamp = new Date().getTime() / 1000;
-var absoluterank = 0;
+var myrank; // my rank in the current game
+var timestamp = new Date().getTime() / 1000; // generates timestamp for database
+var absoluterank = 0; // numerates ranks from 1 to 10. Is reset upon reaching 10.
+var alreadyinserted = false; // checks if player has already been inserted to database
 
 
 /*socket.on('sensor-status', function(data) {
@@ -80,10 +80,6 @@ function play(){
       $('#scoreboard').toggleClass("hidden");
       $('#ingame').toggleClass("hidden");
 
-      $("#myscore").html(endscore);
-
-      console.log(endScore);
-
       return;
     }
 
@@ -108,7 +104,13 @@ $('body').on('keydown', function(e) {
   }
 });
 
-
+$('table').on("change keyup", function(e) {
+  console.log("Input detected!")
+  if (e.keyCode === 13)  {
+    console.log("ENTERED!")
+    writeScore();
+  };
+});
 
 
 
@@ -121,7 +123,7 @@ $('body').on('keydown', function(e) {
 //FIREBASE
 //FIREBASE
 
-endscore = 8000;
+endscore = 1225;
 
 // Initialize Firebase
 var config = {
@@ -140,7 +142,6 @@ var playersRef = dbRef.ref('players/');
 
 getrank(endscore);
 generateleaderboard();
-//generatetable();
 
 function generateleaderboard(){
 
@@ -148,6 +149,7 @@ function generateleaderboard(){
 
   // First delete old leaderboard if it exists.
   $( ".tablerow" ).remove();
+  $( ".myrow" ).remove();
 
   // Then generate new leaderboard
   playersRef.once('value').then(function(snapshot) {
@@ -160,9 +162,76 @@ function generateleaderboard(){
         $("#players").append(myhtml);
 
       });
+
+      if (alreadyinserted == false){
+        var myhtml = myHtml();
+        $("#players").append(myhtml);
+      };
+
     });
   });
 };
+
+function getrank(endscore){
+  var rankref = firebase.database().ref("players").orderByChild("score").startAt(endscore);
+  rankref.once("value")
+  .then(function(snapshot) {
+    myrank = snapshot.numChildren() + 1;
+
+  });
+};
+
+
+// Wenn auf den Button gedrückt wird, Score eintragen.
+function writeScore(){
+  console.log("Inserted Player!")
+  alreadyinserted = true;
+
+  playersRef.push({
+    name: $('#playerinput').val(),
+    score: endScore,
+    invertedscore: - endScore,
+    location: 'Bern',
+    timestamp: timestamp
+  });
+
+  generateleaderboard();
+
+};
+
+// Generate HTML
+function playerHtmlFromObject(player){
+
+  absoluterank++
+
+  var html = '';
+  html += '<tr class="tablerow">';
+  html += '<td class="text-leaderboard">' + absoluterank + '.</td>';
+  html += '<td class="text-leaderboard">'+player.score+'</td>';
+  html += '<td class="text-leaderboard">'+player.name+'</td>';
+  html += '<td class="text-leaderboard">'+player.location+'</td>';
+  //html += '<p>'+player.timestamp+'</p>';
+  html += '</tr>';
+
+  if (absoluterank >= 10){
+    absoluterank = 0;
+  }
+
+  return html;
+
+}
+
+function myHtml(){
+  var html = '';
+  html += '<tr class="myrow">';
+  html += '<td class="text-leaderboard">' + myrank + '.</td>';
+  html += '<td class="text-leaderboard">'+ endscore +' </td>';
+  html += '<td class="text-leaderboard">'+ '<input id="playerinput" class="" type="text" name="" placeholder="ENTER YOUR NAME">' + '</td>';
+  html += '<td class="text-leaderboard">'+ 'Bern' +'</td>';
+  //html += '<p>'+player.timestamp+'</p>';
+  html += '</tr>';
+  return html;
+}
 
 function generateleaderboardchur(){
 
@@ -170,6 +239,7 @@ function generateleaderboardchur(){
 
   // First delete old leaderboard if it exists.
   $( ".tablerow" ).remove();
+  $( ".myrow" ).remove();
 
   // Then generate new leaderboard
   playersRef.once('value').then(function(snapshot) {
@@ -199,6 +269,7 @@ function generateleaderboardbern(){
 
   // First delete old leaderboard if it exists.
   $( ".tablerow" ).remove();
+  $( ".myrow" ).remove();
 
   // Then generate new leaderboard
   playersRef.once('value').then(function(snapshot) {
@@ -221,79 +292,3 @@ function generateleaderboardbern(){
     });
   });
 };
-
-function getrank(endscore){
-  var rankref = firebase.database().ref("players").orderByChild("score").startAt(endscore);
-  rankref.once("value")
-  .then(function(snapshot) {
-    myrank = snapshot.numChildren() + 1;
-
-    $("#rank").html(myrank);
-    $("#myscore").html(endscore);
-
-  });
-};
-
-
-// Wenn auf den Button gedrückt wird, Score eintragen.
-function writeScore(){
-  console.log("Inserted Player!")
-  playersRef.push({
-    name: $('#player').val(),
-    score: endScore,
-    invertedscore: - endScore,
-    location: 'Bern',
-    timestamp: timestamp
-  });
-
-  generateleaderboard();
-
-};
-
-// Generate HTML
-function playerHtmlFromObject(player){
-
-  absoluterank++
-  console.log(absoluterank);
-
-  var html = '';
-  html += '<tr class="tablerow">';
-  html += '<td class="text-leaderboard">' + absoluterank + '.</td>';
-  html += '<td class="text-leaderboard">'+player.score+'</td>';
-  html += '<td class="text-leaderboard">'+player.name+'</td>';
-  html += '<td class="text-leaderboard">'+player.location+'</td>';
-  //html += '<p>'+player.timestamp+'</p>';
-  html += '</tr>';
-
-  if (absoluterank >= 10){
-    absoluterank = 0;
-  }
-
-  return html;
-
-}
-
-/*
-leaderboardPosition();
-
-// Get your position in the leaderboard by counting how many scores there are
-function leaderboardPosition(endscore){
-
-var query = firebase.database().ref("players").orderByChild("score").startAt(endscore);
-query.once("value")
-.then(function(snapshot) {
-snapshot.forEach(function(childSnapshot) {
-
-//console.log(leaderboard);
-
-});
-});
-};
-*/
-
-/*
-// Generate HTML, listen for input, add that last entry to HTML
-playersRef.orderByChild("invertedscore").limitToFirst(5).on("child_added", function(snapshot) {
-document.querySelector('#players').innerHTML += playerHtmlFromObject(snapshot.val());
-});
-*/
