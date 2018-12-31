@@ -107,8 +107,11 @@ img {
       padding:14px 47px;
       text-decoration:none;
 
-      margin-top: 10rem;
       margin-bottom: 3rem;
+    }
+
+    .button-gamestart{
+      margin-top: 10rem;
     }
 
 

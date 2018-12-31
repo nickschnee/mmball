@@ -5,15 +5,14 @@ var socket = io.connect(window.location.href);
 var buttonstatus = false;
 var gamestart = false;
 var gamefinish = false;
-var endScore = 200;
+var endscore = 0; // the score at the end of mygame
 
 var myrank; // my rank in the current game
 var timestamp = new Date().getTime() / 1000; // generates timestamp for database
 var absoluterank = 0; // numerates ranks from 1 to 10. Is reset upon reaching 10.
 var alreadyinserted = false; // checks if player has already been inserted to database
-var lastKnownScore;
-var lastKnownKey;
-var keyarray = [];
+var lastKnownKey; // saves last seen key of a node to push into array
+var keyarray = []; // saves all keys which have been pushed into the array
 
 /*socket.on('sensor-status', function(data) {
 console.log("Ein Empfängnis! " + data);
@@ -60,7 +59,8 @@ function play(){
   socket.on('score', function(score) {
     console.log(score);
     document.getElementById("score").innerHTML = score;
-    endScore = score;
+    endscore = score;
+    console.log("Der Endscore ist: " + endscore);
   });
 
   // Receiving last goal data from server
@@ -82,6 +82,22 @@ function play(){
       $('#scoreboard').toggleClass("hidden");
       $('#ingame').toggleClass("hidden");
 
+      // Display Leaderboard
+      getrank(endscore);
+
+      setTimeout(function(){
+
+        if (myrank > 10 || alreadyinserted){
+          generateleaderboard();
+        } else {
+          generatewinnerboard();
+        }
+
+
+
+      }, 1000);
+      // end Display Leaderboard
+
       return;
     }
 
@@ -92,7 +108,7 @@ function play(){
 // Document Ready
 $(document).ready(function(){
   $('#singleplayerbutton').click(function(){
-    $('.playerButton').toggleClass("hidden");
+    $('.button-gamestart').toggleClass("hidden");
     $('.ingameelement').toggleClass("hidden");
   });
 });
@@ -126,7 +142,7 @@ $('table').on("change keyup", function(e) {
 //FIREBASE
 //FIREBASE
 
-endscore = 200;
+//endscore = 20;
 
 // Initialize Firebase
 var config = {
@@ -143,7 +159,7 @@ firebase.initializeApp(config);
 var dbRef = firebase.database();
 var playersRef = dbRef.ref('players/');
 
-getrank(endscore);
+/*getrank(endscore);
 
 setTimeout(function(){
 
@@ -154,7 +170,7 @@ setTimeout(function(){
 
   }
 
-}, 1000);
+}, 1000);*/
 
 
 
@@ -172,14 +188,33 @@ setTimeout(function(){
 // Functions
 function generatewinnerboard(){
 
-  absoluterank = 0;
-
   // First delete old leaderboard if it exists.
   $( ".tablerow" ).remove();
   $( ".myrow" ).remove();
 
   if (myrank == 1){
+    absoluterank = 1; // set absoluterank to 1 instead of 0 because myrank is already 1
+
     console.log("Du Gewinnertyp!")
+
+    // generate myrank
+    var myhtml = myHtml();
+    $("#players").append(myhtml);
+
+    //  generate rest of leaderboard
+    playersRef.once('value').then(function(snapshot) {
+      var query = playersRef.orderByChild("invertedscore").limitToFirst(9);
+      query.once("value")
+      .then(function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+
+          var myhtml = playerHtmlFromObject(childSnapshot.val());
+          $("#players").append(myhtml);
+
+        });
+
+      });
+    });
 
   } else {
 
@@ -212,14 +247,12 @@ function generatewinnerboard(){
         // generate myrank
         var myhtml = myHtml();
         $("#players").append(myhtml);
-        console.log(lastKnownScore);
 
         absoluterank++;
 
         // generate ranks after myrank
         playersRef.once('value').then(function(snapshot) {
 
-          //var query = playersRef.orderByChild("invertedscore").startAt(-lastKnownScore).limitToFirst(11 - (myrank-1));;
           var secondquery = playersRef.orderByChild("invertedscore").limitToFirst(9);
           secondquery.once("value")
           .then(function(snapshot) {
@@ -286,11 +319,13 @@ function getrank(endscore){
 function writeScore(){
   console.log("Inserted Player!")
   alreadyinserted = true;
+  $('#button-newgame').toggleClass("hidden");
+
 
   playersRef.push({
     name: $('#playerinput').val(),
-    score: endScore,
-    invertedscore: - endScore,
+    score: endscore,
+    invertedscore: - endscore,
     location: 'Bern',
     timestamp: timestamp
   });
@@ -317,9 +352,6 @@ function playerHtmlFromObject(player){
     absoluterank = 0;
   }
 
-  lastKnownScore = player.score;
-  //console.log(lastKnownScore);
-
 
   return html;
 
@@ -330,7 +362,7 @@ function myHtml(){
   html += '<tr class="myrow">';
   html += '<td class="text-leaderboard">' + myrank + '.</td>';
   html += '<td class="text-leaderboard">'+ endscore +' </td>';
-  html += '<td class="text-leaderboard">'+ '<input id="playerinput" class="" type="text" name="" placeholder="ENTER YOUR NAME">' + '</td>';
+  html += '<td class="text-leaderboard">'+ '<input id="playerinput" class="" type="text" name="" placeholder="ENTER YOUR NAME" maxlength="20">' + '</td>';
   html += '<td class="text-leaderboard">'+ 'Bern' +'</td>';
   //html += '<p>'+player.timestamp+'</p>';
   html += '</tr>';

@@ -28,11 +28,11 @@
   </div>
   <!-- ENDE Logo Titel -->
 
-  <div id="ingame" class="hidden">
+  <div id="ingame" class="">
 
     <div class="flexbox">
-      <button autofocus type="button" class="playerButton" id="singleplayerbutton">1 Spieler</button>
-      <button type="button" class="playerButton" id="multiplayerbutton">2 Spieler</button>
+      <button autofocus type="button" class="playerButton button-gamestart" id="singleplayerbutton">1 Spieler</button>
+      <button type="button" class="playerButton button-gamestart" id="multiplayerbutton">2 Spieler</button>
     </div>
 
     <!-- InGame -->
@@ -49,7 +49,7 @@
 
   <!-- Scoreboard -->
 
-  <div id="scoreboard" class="">
+  <div id="scoreboard" class="hidden">
 
     <button class="playerButton" onclick="generateleaderboard()" type="button">GLOBAL</button>
 
@@ -74,6 +74,8 @@
       <!-- </ol> -->
 
     </div>
+
+    <button class="playerButton hidden" id="button-newgame" onclick="" type="button">PLAY AGAIN</button>
 
   </div>
   <!-- ENDE Scoreboard -->
