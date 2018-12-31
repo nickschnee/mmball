@@ -80,20 +80,23 @@ function play(){
       gamefinish = true;
       //window.location.href = 'http://www.google.com';
       $('#scoreboard').toggleClass("hidden");
+      $('.button-gamestart').removeAttr("autofocus");
       $('#ingame').toggleClass("hidden");
 
       // Display Leaderboard
       getrank(endscore);
 
       setTimeout(function(){
-
         if (myrank > 10 || alreadyinserted){
           generateleaderboard();
         } else {
           generatewinnerboard();
         }
 
+        setTimeout(function(){
+          $('#playerinput').focus();
 
+        }, 1000);
 
       }, 1000);
       // end Display Leaderboard
@@ -113,14 +116,18 @@ $(document).ready(function(){
   });
 });
 
-// Change Buttons with arrow keys
-$('body').on('keydown', function(e) {
-  if (e.keyCode === 39 && $('#singleplayerbutton').is(':focus') || e.keyCode === 37 && $('#singleplayerbutton').is(':focus'))  {
-    $('#multiplayerbutton').focus();
-  } else if (e.keyCode === 37 && $('#multiplayerbutton').is(':focus') || e.keyCode === 39 && $('#multiplayerbutton').is(':focus')) {
-    $('#singleplayerbutton').focus();
+$(document).keydown(
+  function(e)
+  {
+    if (e.keyCode == 39) {
+      $(".move:focus").next().focus();
+    }
+
+    if (e.keyCode == 37) {
+      $(".move:focus").prev().focus();
+    }
   }
-});
+);
 
 // Write Player to Database when pressing Enter on Input field
 $('table').on("change keyup", function(e) {
@@ -359,6 +366,7 @@ function writeScore(){
   });
 
   generateleaderboard();
+  $('#button-global').focus();  
 
 };
 
@@ -390,7 +398,7 @@ function myHtml(){
   html += '<tr class="myrow">';
   html += '<td class="text-leaderboard">' + myrank + '.</td>';
   html += '<td class="text-leaderboard">'+ endscore +' </td>';
-  html += '<td class="text-leaderboard">'+ '<input id="playerinput" class="" type="text" name="" placeholder="ENTER YOUR NAME" maxlength="20">' + '</td>';
+  html += '<td class="text-leaderboard">'+ '<input id="playerinput" class="move" type="text" name="" placeholder="ENTER YOUR NAME" maxlength="20">' + '</td>';
   html += '<td class="text-leaderboard">'+ 'Bern' +'</td>';
   //html += '<p>'+player.timestamp+'</p>';
   html += '</tr>';
