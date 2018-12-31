@@ -163,12 +163,12 @@ var playersRef = dbRef.ref('players/');
 
 setTimeout(function(){
 
-  if (myrank > 10 || alreadyinserted){
-    generateleaderboard();
-  } else {
-    generatewinnerboard();
+if (myrank > 10 || alreadyinserted){
+generateleaderboard();
+} else {
+generatewinnerboard();
 
-  }
+}
 
 }, 1000);*/
 
@@ -186,6 +186,34 @@ setTimeout(function(){
 // Functions
 // Functions
 // Functions
+
+function newgame(){
+  console.log("NEW GAME");
+
+  // reset visuals
+  $('.button-gamestart').removeClass("hidden");
+  $('#ingame').removeClass("hidden");
+  $('.ingameelement').addClass("hidden");
+  $('#scoreboard').addClass("hidden");
+  $('#button-newgame').removeClass("hidden");
+
+  buttonstatus = false;
+  gamestart = false;
+  gamefinish = false;
+  endscore = 0; // the score at the end of mygame
+
+  myrank = 0; // my rank in the current game
+  timestamp = new Date().getTime() / 1000; // generates timestamp for database
+  absoluterank = 0; // numerates ranks from 1 to 10. Is reset upon reaching 10.
+  alreadyinserted = false; // checks if player has already been inserted to database
+  lastKnownKey = "nokey"; // saves last seen key of a node to push into array
+  keyarray = []; // saves all keys which have been pushed into the array
+
+  socket.emit('newgame', true);
+
+  location.reload();
+}
+
 function generatewinnerboard(){
 
   // First delete old leaderboard if it exists.

@@ -44,64 +44,82 @@ var score = 0;
 var gamerunning = false;
 var countdownstarted = false;
 
-// RASPBERRY BOARD
-board.on('ready', function () {
-  sensor1 = new five.Sensor.Digital({
-    pin: 'P1-11',
-    freq: 10,
-  });
+thegame();
 
-  sensor2 = new five.Sensor.Digital({
-    pin: 'P1-7',
-    freq: 10,
-  });
+function thegame(){
 
-  button = new five.Button('P1-40')
+  // RASPBERRY BOARD
+  board.on('ready', function () {
+    sensor1 = new five.Sensor.Digital({
+      pin: 'P1-11',
+      freq: 10,
+    });
 
-  button.on("press", function() {
-    console.log( "Button pressed" );
+    sensor2 = new five.Sensor.Digital({
+      pin: 'P1-7',
+      freq: 10,
+    });
 
-    if(!countdownstarted){
-      io.emit('button-status', true);
-      countdownstarted = true;
-    }
+    button = new five.Button('P1-40')
 
-  }); // Button endet Hier
+    button.on("press", function() {
+      console.log( "Button pressed" );
 
-  // Sensoren aktivieren
-  sensor1.on("change", function() {
-    brightness = this.value;
+      if(!countdownstarted){
+        io.emit('button-status', true);
+        countdownstarted = true;
+      }
 
-    if (brightness == 0 && gamerunning){
-      console.log('SCORE IN PIPE A + 10 Points');
-      score = score + 10;
-      console.log(score);
-      io.emit('score', score);
-      io.emit('lastgoal', 10);
-    };
-  });
+    }); // Button endet Hier
 
-  sensor2.on("change", function() {
-    brightness = this.value;
+    // Sensoren aktivieren
+    sensor1.on("change", function() {
+      brightness = this.value;
 
-    if (brightness == 0 && gamerunning){
-      console.log('SCORE IN PIPE B + 25 Points');
-      score = score + 25;
-      console.log(score);
-      io.emit('score', score);
-      io.emit('lastgoal', 25);
-    };
-  });
+      if (brightness == 0 && gamerunning){
+        console.log('SCORE IN PIPE A + 10 Points');
+        score = score + 10;
+        console.log(score);
+        io.emit('score', score);
+        io.emit('lastgoal', 10);
+      };
+    });
 
-  io.on('connection', function(socket) {
+    sensor2.on("change", function() {
+      brightness = this.value;
 
-    socket.on('gamestart', function(gamestart){
-      //console.log("Das funktioniert so toll!");
-      gamerunning = gamestart;
-      console.log("das game läuft:" + gamerunning);
+      if (brightness == 0 && gamerunning){
+        console.log('SCORE IN PIPE B + 25 Points');
+        score = score + 25;
+        console.log(score);
+        io.emit('score', score);
+        io.emit('lastgoal', 25);
+      };
+    });
 
-    }); // ENDE Function gamestart
-  }); //ENDE IO CONNECTION
-}); // ENDE BOARD
+    io.on('connection', function(socket) {
+
+      socket.on('gamestart', function(gamestart){
+        //console.log("Das funktioniert so toll!");
+        gamerunning = gamestart;
+        console.log("das game läuft:" + gamerunning);
+
+      }); // ENDE Function gamestart
+
+      socket.on('newgame', function(newgame){
+        console.log("NEW GAME");
+
+        score = 0;
+        gamerunning = false;
+        countdownstarted = false;
+
+        thegame(); // start thegame() new
+
+      }); // ENDE Function gamestart
+
+    }); //ENDE IO CONNECTION
+  }); // ENDE BOARD
+
+}; // ENDE thegame()
 
 // SOCKET
