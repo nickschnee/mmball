@@ -161,9 +161,9 @@ $(document).keydown(
 
 // Write Player to Database when pressing Enter on Input field
 $('table').on("change keyup", function(e) {
-  console.log("Input detected!")
-  if (e.keyCode === 13)  {
-    console.log("ENTERED!")
+  //console.log("Input detected!")
+  if (e.keyCode === 13 && $('#playerinput').val() != "" )  {
+    //console.log("ENTERED!")
     writeScore();
   };
 });
