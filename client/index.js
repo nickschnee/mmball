@@ -13,6 +13,7 @@ var absoluterank = 0; // numerates ranks from 1 to 10. Is reset upon reaching 10
 var alreadyinserted = false; // checks if player has already been inserted to database
 var lastKnownKey; // saves last seen key of a node to push into array
 var keyarray = []; // saves all keys which have been pushed into the array
+var devicelocation = "Bern"; // set the location of this device
 
 /*socket.on('sensor-status', function(data) {
 console.log("Ein Empfängnis! " + data);
@@ -366,7 +367,7 @@ function writeScore(){
     name: $('#playerinput').val(),
     score: endscore,
     invertedscore: - endscore,
-    location: 'Bern',
+    location: devicelocation,
     timestamp: timestamp
   });
 
