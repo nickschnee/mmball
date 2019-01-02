@@ -74,16 +74,18 @@ img {
 
     /* Blinkende Schrift */
     .blink {
-      animation: blinkingText 0.8s infinite;
+      animation: blinkingText 0.8s linear infinite;
     }
 
     @keyframes blinkingText {
       0% {
         text-shadow: 0px 0 #fffa00, 0 0px #fffa00, 0px 0 #fffa00, 0 0px #fffa00;
+        /*color: #FF0092;*/
       }
 
       100% {
         text-shadow: -1px 0 #fffa00, 0 1px #fffa00, 1px 0 #fffa00, 0 -1px #fffa00;
+        /*color: #fffa00;*/
       }
     }
 
@@ -112,14 +114,14 @@ img {
     .playerButton:hover {
       background:transparent;
       color:#f008b7;
-      animation: blinkingText 0.5s infinite;
+      animation: blinkingText 1.5s infinite;
     }
 
     .playerButton:focus {
       background: transparent;
       color:#f008b7;
       border-style: hidden;
-      animation: blinkingText 0.5s infinite;
+      animation: blinkingText 1.5s infinite;
     }
 
     .playerButton:active {
