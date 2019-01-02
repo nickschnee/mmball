@@ -31,9 +31,9 @@
 
       <h3>Bern</h3>
 
-      <button type="button" class="button">Quit</button>
-      <button type="button" class="button">Troubleshoot</button>
-      <button type="button" class="button">Change Location</button>
+      <button type="button" class="playerButton">Quit</button>
+      <button type="button" class="playerButton">Troubleshoot</button>
+      <button type="button" class="playerButton">Change Location</button>
 
     </div>
 
@@ -48,8 +48,8 @@
   <div id="ingame" class="">
 
     <div class="flexbox">
-      <button autofocus type="button" class="button button-gamestart move" id="singlebutton">1 Spieler</button>
-      <button type="button" class="button button-gamestart move" id="multibutton">2 Spieler</button>
+      <button autofocus type="button" class="playerButton button-gamestart move" id="singleplayerbutton">1 Spieler</button>
+      <button type="button" class="playerButton button-gamestart move" id="multiplayerbutton">2 Spieler</button>
     </div>
 
     <!-- InGame -->
@@ -77,10 +77,10 @@
 
   <div id="scoreboard" class="hidden">
 
-    <button id="button-global" class="button move" onclick="generateleaderboard()" type="button">GLOBAL</button>
-    <button class="button move" onclick="generateleaderboardchur()" type="button">CHUR</button>
-    <button class="button move" onclick="generateleaderboardbern()" type="button">BERN</button>
-    <button class="button move" id="button-newgame" onclick="newgame()" type="button">PLAY AGAIN</button>
+    <button id="button-global" class="playerButton move" onclick="generateleaderboard()" type="button">GLOBAL</button>
+    <button class="playerButton move" onclick="generateleaderboardchur()" type="button">CHUR</button>
+    <button class="playerButton move" onclick="generateleaderboardbern()" type="button">BERN</button>
+    <button class="playerButton move" id="button-newgame" onclick="newgame()" type="button">PLAY AGAIN</button>
 
     <div class="leaderboard">
 

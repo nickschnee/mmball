@@ -91,7 +91,7 @@ img {
 
     a:hover {color: #fffa00;}
 
-    .button {
+    .playerButton {
 
       display:inline-block;
       cursor:pointer;
@@ -109,20 +109,20 @@ img {
       font-size:75px;
     }
 
-    .button:hover {
+    .playerButton:hover {
       background:transparent;
       color:#f008b7;
       animation: blinkingText 0.5s infinite;
     }
 
-    .button:focus {
+    .playerButton:focus {
       background: transparent;
       color:#f008b7;
       border-style: hidden;
       animation: blinkingText 0.5s infinite;
     }
 
-    .button:active {
+    .playerButton:active {
       position:relative;
       top:1px;
     }
@@ -191,7 +191,7 @@ img {
 
 
     /*
-        .button:hover {
+        .playerButton:hover {
           background:-webkit-gradient(linear, left top, left bottom, color-stop(0.2, #f94bce), color-stop(1, #f94bce));
           background:-moz-linear-gradient(top, #f94bce 20%, #f94bce 100%);
           background:-webkit-linear-gradient(top, #f94bce 20%, #f94bce 100%);
@@ -201,7 +201,7 @@ img {
           filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f94bce', endColorstr='#f94bce',GradientType=0);
         }
 
-        .button:focus {
+        .playerButton:focus {
           background:-webkit-gradient(linear, left top, left bottom, color-stop(0.2, #f94bce), color-stop(1, #f94bce));
           background:-moz-linear-gradient(top, #f94bce 20%, #f94bce 100%);
           background:-webkit-linear-gradient(top, #f94bce 20%, #f94bce 100%);
