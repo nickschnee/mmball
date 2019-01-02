@@ -23,6 +23,7 @@ document.getElementById("score").innerHTML = data;
 
 // First Screen
 $(document).ready(function(){
+
   $('#singleplayerbutton').click(function(){
     $('.button-gamestart').toggleClass("hidden");
     $('.game-start').toggleClass("hidden");
@@ -128,6 +129,18 @@ function play(){
 
 };
 
+
+// ENDE GAMEPLAY
+// ENDE GAMEPLAY
+// ENDE GAMEPLAY
+
+
+// Start Eventlisteners
+// Start Eventlisteners
+// Start Eventlisteners
+// Start Eventlisteners
+// Start Eventlisteners
+
 $(document).keydown(
   function(e)
   {
@@ -155,18 +168,43 @@ $('table').on("change keyup", function(e) {
   };
 });
 
+// Generate Leaderboard on Hover
+$("#button-global").focus(function(){
+  generateleaderboard();
+});
+
+$("#button-chur").focus(function(){
+  generateleaderboardchur();
+});
+
+$("#button-bern").focus(function(){
+  generateleaderboardbern();
+});
+
+$("#button-newgame").focus(function(){
+  $('#text-playagain').removeClass("hidden");
+  $( "#players" ).addClass("hidden");
+  $( ".tablerow" ).remove();
+  $( ".myrow" ).remove();
+});
+
+$("#button-newgame").blur(function(){
+  $('#text-playagain').addClass("hidden");
+  $( "#players" ).removeClass("hidden");
+});
 
 
-
-
+// Ende Eventlisteners
+// Ende Eventlisteners
+// Ende Eventlisteners
+// Ende Eventlisteners
+// Ende Eventlisteners
 
 //FIREBASE
 //FIREBASE
 //FIREBASE
 //FIREBASE
 //FIREBASE
-
-//endscore = 20;
 
 // Initialize Firebase
 var config = {
@@ -405,7 +443,6 @@ function playerHtmlFromObject(player){
     absoluterank = 0;
   }
 
-
   return html;
 
 }
@@ -443,7 +480,11 @@ function generateleaderboardchur(){
         var entry = childSnapshot.val();
         if (entry.location == 'Chur' && i <= 10) {
 
-          document.querySelector('#players').innerHTML += playerHtmlFromObject(childSnapshot.val());
+          //document.querySelector('#players').innerHTML += playerHtmlFromObject(childSnapshot.val());
+
+          var myhtml = playerHtmlFromObject(childSnapshot.val());
+          $("#players").append(myhtml);
+
           i++;
 
         };
@@ -473,7 +514,11 @@ function generateleaderboardbern(){
         var entry = childSnapshot.val();
         if (entry.location == 'Bern' && i <= 10) {
 
-          document.querySelector('#players').innerHTML += playerHtmlFromObject(childSnapshot.val());
+          //document.querySelector('#players').innerHTML += playerHtmlFromObject(childSnapshot.val());
+
+          var myhtml = playerHtmlFromObject(childSnapshot.val());
+          $("#players").append(myhtml);
+
           i++;
 
         };

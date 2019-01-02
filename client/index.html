@@ -78,9 +78,9 @@
   <div id="scoreboard" class="hidden">
 
     <button id="button-global" class="playerButton move" onclick="generateleaderboard()" type="button">GLOBAL</button>
-    <button class="playerButton move" onclick="generateleaderboardchur()" type="button">CHUR</button>
-    <button class="playerButton move" onclick="generateleaderboardbern()" type="button">BERN</button>
-    <button class="playerButton move" id="button-newgame" onclick="newgame()" type="button">PLAY AGAIN</button>
+    <button id="button-chur" class="playerButton move" onclick="generateleaderboardchur()" type="button">CHUR</button>
+    <button id="button-bern" class="playerButton move" onclick="generateleaderboardbern()" type="button">BERN</button>
+    <button id="button-newgame" class="playerButton move" id="button-newgame" onclick="newgame()" type="button">EXIT</button>
 
     <div class="leaderboard">
 
@@ -97,6 +97,12 @@
       <!-- <ol id="players" class="list-group"> -->
       <!-- Contact Object li.list-group-item.contact will be added here by js -->
       <!-- </ol> -->
+
+    </div>
+
+    <div id="text-playagain" class="hidden">
+
+      <p>Press ENTER to confirm exit</p>
 
     </div>
 
