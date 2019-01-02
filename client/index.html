@@ -31,9 +31,9 @@
 
       <h3>Bern</h3>
 
-      <button autofocus type="button" class="playerButton move" id="singleplayerbutton">Quit</button>
-      <button autofocus type="button" class="playerButton move" id="singleplayerbutton">Troubleshoot</button>
-      <button autofocus type="button" class="playerButton move" id="singleplayerbutton">Change Location</button>
+      <button type="button" class="playerButton">Quit</button>
+      <button type="button" class="playerButton">Troubleshoot</button>
+      <button type="button" class="playerButton">Change Location</button>
 
     </div>
 
@@ -69,10 +69,9 @@
   <div id="scoreboard" class="hidden">
 
     <button id="button-global" class="playerButton move" onclick="generateleaderboard()" type="button">GLOBAL</button>
-
     <button class="playerButton move" onclick="generateleaderboardchur()" type="button">CHUR</button>
-
     <button class="playerButton move" onclick="generateleaderboardbern()" type="button">BERN</button>
+    <button class="playerButton move hidden" id="button-newgame" onclick="newgame()" type="button">PLAY AGAIN</button>
 
     <div class="leaderboard">
 
@@ -91,8 +90,6 @@
       <!-- </ol> -->
 
     </div>
-
-    <button class="playerButton move hidden" id="button-newgame" onclick="newgame()" type="button">PLAY AGAIN</button>
 
   </div>
   <!-- ENDE Scoreboard -->

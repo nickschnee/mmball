@@ -7,6 +7,9 @@ body {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
+
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 h1 {
@@ -88,14 +91,14 @@ img {
     a:hover {color: #fffa00;}
 
     .playerButton {
-      background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7c2e8f), color-stop(1, #FF0092));
-      background:-moz-linear-gradient(top, #7c2e8f 5%, #FF0092 100%);
-      background:-webkit-linear-gradient(top, #7c2e8f 5%, #FF0092 100%);
-      background:-o-linear-gradient(top, #7c2e8f 5%, #FF0092 100%);
-      background:-ms-linear-gradient(top, #7c2e8f 5%, #FF0092 100%);
-      background:linear-gradient(to bottom, #7c2e8f 5%, #FF0092 100%);
-      filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7c2e8f', endColorstr='#FF0092',GradientType=0);
-      background-color:#7c2e8f;
+      background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #004080), color-stop(1, #0067cd));
+      background:-moz-linear-gradient(top, #004080 5%, #0067cd 100%);
+      background:-webkit-linear-gradient(top, #004080 5%, #0067cd 100%);
+      background:-o-linear-gradient(top, #004080 5%, #0067cd 100%);
+      background:-ms-linear-gradient(top, #004080 5%, #0067cd 100%);
+      background:linear-gradient(to bottom, #004080 5%, #0067cd 100%);
+      filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#004080', endColorstr='#0067cd',GradientType=0);
+      background-color:#004080;
       -moz-border-radius:28px;
       -webkit-border-radius:28px;
       border-radius:28px;
@@ -114,27 +117,26 @@ img {
       margin-top: 10rem;
     }
 
-
     .playerButton:hover {
-      background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #FF0092), color-stop(1, #7c2e8f));
-      background:-moz-linear-gradient(top, #FF0092 5%, #7c2e8f 100%);
-      background:-webkit-linear-gradient(top, #FF0092 5%, #7c2e8f 100%);
-      background:-o-linear-gradient(top, #FF0092 5%, #7c2e8f 100%);
-      background:-ms-linear-gradient(top, #FF0092 5%, #7c2e8f 100%);
-      background:linear-gradient(to bottom, #FF0092 5%, #7c2e8f 100%);
-      filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF0092', endColorstr='#7c2e8f',GradientType=0);
-      background-color:#FF0092;
+      background:-webkit-gradient(linear, left top, left bottom, color-stop(0.2, #00eaff), color-stop(1, #0066cc));
+      background:-moz-linear-gradient(top, #00eaff 20%, #0066cc 100%);
+      background:-webkit-linear-gradient(top, #00eaff 20%, #0066cc 100%);
+      background:-o-linear-gradient(top, #00eaff 20%, #0066cc 100%);
+      background:-ms-linear-gradient(top, #00eaff 20%, #0066cc 100%);
+      background:linear-gradient(to bottom, #00eaff 20%, #0066cc 100%);
+      filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00eaff', endColorstr='#0066cc',GradientType=0);
+      background-color:#00eaff;
     }
 
     .playerButton:focus {
-      background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #FF0092), color-stop(1, #7c2e8f));
-      background:-moz-linear-gradient(top, #FF0092 5%, #7c2e8f 100%);
-      background:-webkit-linear-gradient(top, #FF0092 5%, #7c2e8f 100%);
-      background:-o-linear-gradient(top, #FF0092 5%, #7c2e8f 100%);
-      background:-ms-linear-gradient(top, #FF0092 5%, #7c2e8f 100%);
-      background:linear-gradient(to bottom, #FF0092 5%, #7c2e8f 100%);
-      filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF0092', endColorstr='#7c2e8f',GradientType=0);
-      background-color:#FF0092;
+      background:-webkit-gradient(linear, left top, left bottom, color-stop(0.2, #00eaff), color-stop(1, #0066cc));
+      background:-moz-linear-gradient(top, #00eaff 20%, #0066cc 100%);
+      background:-webkit-linear-gradient(top, #00eaff 20%, #0066cc 100%);
+      background:-o-linear-gradient(top, #00eaff 20%, #0066cc 100%);
+      background:-ms-linear-gradient(top, #00eaff 20%, #0066cc 100%);
+      background:linear-gradient(to bottom, #00eaff 20%, #0066cc 100%);
+      filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00eaff', endColorstr='#0066cc',GradientType=0);
+      background-color:#00eaff;
 
     }
 
