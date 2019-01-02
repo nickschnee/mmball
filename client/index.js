@@ -126,6 +126,11 @@ $(document).keydown(
     if (e.keyCode == 37) {
       $(".move:focus").prev().focus();
     }
+
+    if (e.keyCode == 27) {
+      $('#myModal').toggleClass("hidden");
+    }
+
   }
 );
 
@@ -366,7 +371,7 @@ function writeScore(){
   });
 
   generateleaderboard();
-  $('#button-global').focus();  
+  $('#button-global').focus();
 
 };
 
