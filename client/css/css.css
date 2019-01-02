@@ -92,53 +92,36 @@ img {
     a:hover {color: #fffa00;}
 
     .playerButton {
-      background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #004080), color-stop(1, #0067cd));
-      background:-moz-linear-gradient(top, #004080 5%, #0067cd 100%);
-      background:-webkit-linear-gradient(top, #004080 5%, #0067cd 100%);
-      background:-o-linear-gradient(top, #004080 5%, #0067cd 100%);
-      background:-ms-linear-gradient(top, #004080 5%, #0067cd 100%);
-      background:linear-gradient(to bottom, #004080 5%, #0067cd 100%);
-      filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#004080', endColorstr='#0067cd',GradientType=0);
-      background-color:#004080;
-      -moz-border-radius:28px;
-      -webkit-border-radius:28px;
-      border-radius:28px;
+
       display:inline-block;
       cursor:pointer;
       color:#fffa00;
       font-family:'VT323', monospace;
-      font-size:20px;
+      font-size:50px;
       padding:14px 47px;
       text-decoration:none;
+      border-style:hidden;
+      background: transparent;
 
       margin-bottom: 3rem;
     }
 
     .button-gamestart{
       margin-top: 10rem;
+      font-size:75px;
     }
 
     .playerButton:hover {
-      background:-webkit-gradient(linear, left top, left bottom, color-stop(0.2, #00eaff), color-stop(1, #0066cc));
-      background:-moz-linear-gradient(top, #00eaff 20%, #0066cc 100%);
-      background:-webkit-linear-gradient(top, #00eaff 20%, #0066cc 100%);
-      background:-o-linear-gradient(top, #00eaff 20%, #0066cc 100%);
-      background:-ms-linear-gradient(top, #00eaff 20%, #0066cc 100%);
-      background:linear-gradient(to bottom, #00eaff 20%, #0066cc 100%);
-      filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00eaff', endColorstr='#0066cc',GradientType=0);
-      background-color:#00eaff;
+      background:transparent;
+      color:#f008b7;
+      animation: blinkingText 0.5s infinite;
     }
 
     .playerButton:focus {
-      background:-webkit-gradient(linear, left top, left bottom, color-stop(0.2, #00eaff), color-stop(1, #0066cc));
-      background:-moz-linear-gradient(top, #00eaff 20%, #0066cc 100%);
-      background:-webkit-linear-gradient(top, #00eaff 20%, #0066cc 100%);
-      background:-o-linear-gradient(top, #00eaff 20%, #0066cc 100%);
-      background:-ms-linear-gradient(top, #00eaff 20%, #0066cc 100%);
-      background:linear-gradient(to bottom, #00eaff 20%, #0066cc 100%);
-      filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00eaff', endColorstr='#0066cc',GradientType=0);
-      background-color:#00eaff;
-
+      background: transparent;
+      color:#f008b7;
+      border-style: hidden;
+      animation: blinkingText 0.5s infinite;
     }
 
     .playerButton:active {
@@ -161,13 +144,13 @@ img {
       font-family: 'VT323', monospace;
       font-size: 100%;
       color: #fffa00;
-;
+      ;
     }
 
     ::placeholder {
-      color: #FF0092;
+      color: #fffa00;
       opacity: 0.8; /* Firefox */
-      text-shadow: -1px 0 #fffa00, 0 1px #fffa00, 1px 0 #fffa00, 0 -1px #fffa00;
+      /*text-shadow: -1px 0 #fffa00, 0 1px #fffa00, 1px 0 #fffa00, 0 -1px #fffa00;*/
 
       animation: blinkingText 0.8s infinite;
 
@@ -207,3 +190,27 @@ img {
       border: solid 10px;
       border-color: #FF0092;
     }
+
+
+    /*
+        .playerButton:hover {
+          background:-webkit-gradient(linear, left top, left bottom, color-stop(0.2, #f94bce), color-stop(1, #f94bce));
+          background:-moz-linear-gradient(top, #f94bce 20%, #f94bce 100%);
+          background:-webkit-linear-gradient(top, #f94bce 20%, #f94bce 100%);
+          background:-o-linear-gradient(top, #f94bce 20%, #f94bce 100%);
+          background:-ms-linear-gradient(top, #f94bce 20%, #f94bce 100%);
+          background:linear-gradient(to bottom, #f94bce 20%, #f94bce 100%);
+          filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f94bce', endColorstr='#f94bce',GradientType=0);
+        }
+
+        .playerButton:focus {
+          background:-webkit-gradient(linear, left top, left bottom, color-stop(0.2, #f94bce), color-stop(1, #f94bce));
+          background:-moz-linear-gradient(top, #f94bce 20%, #f94bce 100%);
+          background:-webkit-linear-gradient(top, #f94bce 20%, #f94bce 100%);
+          background:-o-linear-gradient(top, #f94bce 20%, #f94bce 100%);
+          background:-ms-linear-gradient(top, #f94bce 20%, #f94bce 100%);
+          background:linear-gradient(to bottom, #f94bce 20%, #f94bce 100%);
+          filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f94bce', endColorstr='#f94bce',GradientType=0);
+          background-color:#f94bce;
+        }
+    */

@@ -40,6 +40,13 @@ socket.on('button-status', function(buttonstatus) {
 
 });
 
+function simulatebuzzer(){
+  // When Buzzer is Pushed, Show Third Screen
+  $(".game-start").toggleClass('hidden');
+  $("#pregame-countdown").toggleClass('hidden');
+  gameintro();
+}
+
 // Countdown is Starting
 function gameintro () {
   var timeleft = 10;
@@ -65,6 +72,7 @@ function gameintro () {
 function play(){
   console.log("Lasst die Spiele beginnen!");
   $(".game-intro").toggleClass("hidden");
+  $(".game").toggleClass("hidden");
 
   // Receiving absolute score from server
   // The score is pushed into HTML
