@@ -371,7 +371,7 @@ function getrank(endscore){
 function writeScore(){
   console.log("Inserted Player!")
   alreadyinserted = true;
-  $('#button-newgame').toggleClass("hidden");
+  //$('#button-newgame').toggleClass("hidden");
 
 
   playersRef.push({
