@@ -21,20 +21,31 @@ document.getElementById("score").innerHTML = data;
 
 }); */
 
+// First Screen
+$(document).ready(function(){
+  $('#singleplayerbutton').click(function(){
+    $('.button-gamestart').toggleClass("hidden");
+    $('.game-start').toggleClass("hidden");
+  });
+});
+
+// Then Show Second Screen when pressed on button
 socket.on('button-status', function(buttonstatus) {
   console.log('Button Pressed, Game starting');
 
-  // Countdown for Gamestart
+  // When Buzzer is Pushed, Show Third Screen
+  $(".game-start").toggleClass('hidden');
+  $("#pregame-countdown").toggleClass('hidden');
   gameintro();
 
 });
 
-// Functions
+// Countdown is Starting
 function gameintro () {
   var timeleft = 10;
   var downloadTimer = setInterval(function(){
     timeleft--;
-    document.getElementById("gameinfo").textContent = "Game starting in " + timeleft + " Seconds";
+    document.getElementById("pregame-countdown").textContent = "Game starting in " + timeleft + " Seconds";
 
     if(timeleft <= 0){
       gamestart = true;
@@ -53,7 +64,7 @@ function gameintro () {
 
 function play(){
   console.log("Lasst die Spiele beginnen!");
-  $("#gameinfo").remove();
+  $(".game-intro").toggleClass("hidden");
 
   // Receiving absolute score from server
   // The score is pushed into HTML
@@ -108,14 +119,6 @@ function play(){
   },1000);
 
 };
-
-// Document Ready
-$(document).ready(function(){
-  $('#singleplayerbutton').click(function(){
-    $('.button-gamestart').toggleClass("hidden");
-    $('.ingameelement').toggleClass("hidden");
-  });
-});
 
 $(document).keydown(
   function(e)
@@ -405,7 +408,7 @@ function myHtml(){
   html += '<td class="text-leaderboard">' + myrank + '.</td>';
   html += '<td class="text-leaderboard">'+ endscore +' </td>';
   html += '<td class="text-leaderboard">'+ '<input id="playerinput" class="move" type="text" name="" placeholder="ENTER YOUR NAME" maxlength="20">' + '</td>';
-  html += '<td class="text-leaderboard">'+ 'Bern' +'</td>';
+  html += '<td class="text-leaderboard">'+ devicelocation +'</td>';
   //html += '<p>'+player.timestamp+'</p>';
   html += '</tr>';
   return html;

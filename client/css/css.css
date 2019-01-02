@@ -59,7 +59,8 @@ th{
 }
 
 .myrow{
-  text-shadow: -1px 0 #fffa00, 0 1px #fffa00, 1px 0 #fffa00, 0 -1px #fffa00;
+  /*text-shadow: -1px 0 #fffa00, 0 1px #fffa00, 1px 0 #fffa00, 0 -1px #fffa00;*/
+  color: #fffa00;
 }
 
 img {
@@ -159,8 +160,8 @@ img {
       border: none;
       font-family: 'VT323', monospace;
       font-size: 100%;
-      color: #FF0092;
-      text-shadow: -1px 0 #fffa00, 0 1px #fffa00, 1px 0 #fffa00, 0 -1px #fffa00;
+      color: #fffa00;
+;
     }
 
     ::placeholder {
