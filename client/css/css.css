@@ -235,13 +235,19 @@ img {
 
 
 progress[value] {
+  background: transparent;
   -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
+
+  border: none;
+
 
   width: 500px;
   height: 50px;
 }
 
+/*
 progress[value]::-webkit-progress-bar {
   background-color: transparent;
   border-radius: 2px;
@@ -264,6 +270,37 @@ progress[value]::-webkit-progress-value {
     -webkit-animation: animate-stripes 5s linear infinite;
     animation: animate-stripes 5s linear infinite;
   }
+*/
+
+
+progress[value]::-moz-progress-bar { 
+ 
+    border-style:groove; 
+    background-image:
+      
+    -moz-linear-gradient(
+      transparent 0%, 
+      rgba(0, 0, 0, 0) 50%, 
+      rgba(0, 0, 0, 0) 50%, 
+      transparent 0% 
+    ),
+      /*
+    -moz-linear-gradient(
+      top, 
+  rgba(255, 255, 255, 0.5),
+    rgba(0, 0, 0, 0.1)),
+    ),
+    */
+  
+    -moz-linear-gradient(
+      top, 
+      #fffa00, 
+      #FF0092
+    );
+  border-style: hidden;
+  background-color: black;
+ /* background-size: 5px 20px, 100% 100%, 100% 100%; */
+}
 
   /*
 
