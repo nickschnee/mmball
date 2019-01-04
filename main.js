@@ -43,6 +43,7 @@ var brightness;
 var score = 0;
 var gamerunning = false;
 var countdownstarted = false;
+var singleplayer = false; // sets if singleplayermode has been started yet
 
 thegame();
 
@@ -65,7 +66,7 @@ function thegame(){
     button.on("press", function() {
       console.log( "Button pressed" );
 
-      if(!countdownstarted){
+      if(!countdownstarted && singleplayer){
         io.emit('button-status', true);
         countdownstarted = true;
       }
@@ -98,6 +99,12 @@ function thegame(){
     });
 
     io.on('connection', function(socket) {
+
+      socket.on('singleplayer', function(newgame){
+        console.log("Singleplayer");
+        singleplayer = true;
+
+      }); // ENDE Function singleplayer
 
       socket.on('gamestart', function(gamestart){
         //console.log("Das funktioniert so toll!");

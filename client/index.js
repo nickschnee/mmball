@@ -1,5 +1,33 @@
 // NICHT LÖSCHEN - WICHTIGES JS FILE, DAMIT FUNKTIONIERT DER GANZE CLIENT
 
+//FIREBASE
+//FIREBASE
+//FIREBASE
+//FIREBASE
+//FIREBASE
+
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyCYhBFX8j5fBbdgeGqu5IuQAiSiswyIxcM",
+  authDomain: "mmball-6c217.firebaseapp.com",
+  databaseURL: "https://mmball-6c217.firebaseio.com/",
+  projectId: "mmball-6c217",
+  storageBucket: "mmball-6c217.appspot.com",
+  messagingSenderId: "1011219128121"
+};
+firebase.initializeApp(config);
+
+//Create firebase database reference
+var dbRef = firebase.database();
+var playersRef = dbRef.ref('players/');
+
+// ENDE Firebase
+// ENDE Firebase
+// ENDE Firebase
+// ENDE Firebase
+// ENDE Firebase
+
+
 var socket = io.connect(window.location.href);
 
 var buttonstatus = false;
@@ -14,6 +42,7 @@ var alreadyinserted = false; // checks if player has already been inserted to da
 var lastKnownKey; // saves last seen key of a node to push into array
 var keyarray = []; // saves all keys which have been pushed into the array
 var devicelocation = "Bern"; // set the location of this device
+var highscore; // get the highscore from database gethighscore() to display at the beginning
 
 /*socket.on('sensor-status', function(data) {
 console.log("Ein Empfängnis! " + data);
@@ -24,29 +53,25 @@ document.getElementById("score").innerHTML = data;
 // First Screen
 $(document).ready(function(){
 
+  gethighscore();
+
   $('#singleplayerbutton').click(function(){
+    socket.emit('singleplayer', true);
     $('.button-gamestart').toggleClass("hidden");
     $('.game-start').toggleClass("hidden");
   });
 });
 
-// Then Show Second Screen when pressed on button
-socket.on('button-status', function(buttonstatus) {
-  console.log('Button Pressed, Game starting');
+  // Then Show Second Screen when pressed on button
+  socket.on('button-status', function(buttonstatus) {
+    console.log('Button Pressed, Game starting');
 
-  // When Buzzer is Pushed, Show Third Screen
-  $(".game-start").toggleClass('hidden');
-  $("#pregame-countdown").toggleClass('hidden');
-  gameintro();
+    // When Buzzer is Pushed, Show Third Screen
+    $(".game-start").toggleClass('hidden');
+    $("#pregame-countdown").toggleClass('hidden');
+    gameintro();
 
-});
-
-function simulatebuzzer(){
-  // When Buzzer is Pushed, Show Third Screen
-  $(".game-start").toggleClass('hidden');
-  $("#pregame-countdown").toggleClass('hidden');
-  gameintro();
-}
+  });
 
 // Countdown is Starting
 function gameintro () {
@@ -199,46 +224,6 @@ $("#button-newgame").blur(function(){
 // Ende Eventlisteners
 // Ende Eventlisteners
 // Ende Eventlisteners
-
-//FIREBASE
-//FIREBASE
-//FIREBASE
-//FIREBASE
-//FIREBASE
-
-// Initialize Firebase
-var config = {
-  apiKey: "AIzaSyCYhBFX8j5fBbdgeGqu5IuQAiSiswyIxcM",
-  authDomain: "mmball-6c217.firebaseapp.com",
-  databaseURL: "https://mmball-6c217.firebaseio.com/",
-  projectId: "mmball-6c217",
-  storageBucket: "mmball-6c217.appspot.com",
-  messagingSenderId: "1011219128121"
-};
-firebase.initializeApp(config);
-
-//Create firebase database reference
-var dbRef = firebase.database();
-var playersRef = dbRef.ref('players/');
-
-/*getrank(endscore);
-
-setTimeout(function(){
-
-if (myrank > 10 || alreadyinserted){
-generateleaderboard();
-} else {
-generatewinnerboard();
-
-}
-
-}, 1000);*/
-
-
-
-
-
-
 
 // Functions
 // Functions
@@ -420,7 +405,7 @@ function writeScore(){
     timestamp: timestamp
   });
 
-  generateleaderboard();
+  //generateleaderboard();
   $('#button-global').focus();
 
 };
@@ -526,3 +511,29 @@ function generateleaderboardbern(){
     });
   });
 };
+
+function gethighscore(){
+
+  playersRef.once('value').then(function(snapshot) {
+    var query = playersRef.orderByChild("invertedscore").limitToFirst(1);
+    query.once("value")
+    .then(function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+
+        var entry = childSnapshot.val();
+
+        highscore = entry.score;
+
+        $("#highscore").html(highscore);
+
+      });
+    });
+  });
+};
+
+function simulatebuzzer(){
+  // When Buzzer is Pushed, Show Third Screen
+  $(".game-start").toggleClass('hidden');
+  $("#pregame-countdown").toggleClass('hidden');
+  gameintro();
+}

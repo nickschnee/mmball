@@ -8,8 +8,7 @@ body {
   margin-left: auto;
   margin-right: auto;
 
-  overflow-x: hidden;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 h1 {
@@ -107,7 +106,7 @@ img {
     }
 
     .button-gamestart{
-      margin-top: 10rem;
+      margin-top: 3rem;
       font-size:75px;
     }
 
@@ -219,7 +218,7 @@ img {
 progress[value] {
   -webkit-appearance: none;
    appearance: none;
-    
+
     width: 500px;
     height: 50px;
 }
@@ -234,15 +233,15 @@ progress[value]::-webkit-progress-bar {
 
 progress[value]::-webkit-progress-value {
   background-image:
-	 
-	   -webkit-linear-gradient(top, 
-	                           rgba(255, 255, 255, 0.5), 
+
+	   -webkit-linear-gradient(top,
+	                           rgba(255, 255, 255, 0.5),
 	                           rgba(0, 0, 0, 0.1)),
 	   -webkit-linear-gradient(top, #fffa00, #f00843);
 
-    border-radius: 1px; 
+    border-radius: 1px;
     background-size: 100px 200px, 100% 100%, 100% 100%;
-    
+
     -webkit-animation: animate-stripes 5s linear infinite;
         animation: animate-stripes 5s linear infinite;
 }
