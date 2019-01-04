@@ -62,16 +62,16 @@ $(document).ready(function(){
   });
 });
 
-  // Then Show Second Screen when pressed on button
-  socket.on('button-status', function(buttonstatus) {
-    console.log('Button Pressed, Game starting');
+// Then Show Second Screen when pressed on button
+socket.on('button-status', function(buttonstatus) {
+  console.log('Button Pressed, Game starting');
 
-    // When Buzzer is Pushed, Show Third Screen
-    $(".game-start").toggleClass('hidden');
-    $("#pregame-countdown").toggleClass('hidden');
-    gameintro();
+  // When Buzzer is Pushed, Show Third Screen
+  $(".game-start").toggleClass('hidden');
+  $("#pregame-countdown").toggleClass('hidden');
+  gameintro();
 
-  });
+});
 
 // Countdown is Starting
 function gameintro () {
@@ -107,6 +107,13 @@ function play(){
     document.getElementById("score").innerHTML = score;
     endscore = score;
     console.log("Der Endscore ist: " + endscore);
+
+    if (endscore > highscore){
+      $("#highscore").html(endscore);
+      $(".highscore").addClass("shadow");
+      $(".score").addClass("shadow");
+    }
+
   });
 
   // Receiving last goal data from server
@@ -128,6 +135,7 @@ function play(){
       $('#scoreboard').toggleClass("hidden");
       $('.button-gamestart').removeAttr("autofocus");
       $('#ingame').toggleClass("hidden");
+      $('.highscore').toggleClass("hidden");
 
       // Display Leaderboard
       getrank(endscore);
@@ -193,7 +201,25 @@ $('table').on("change keyup", function(e) {
   };
 });
 
-// Generate Leaderboard on Hover
+// Modal Focus
+$("#button-quit").focus(function(){
+
+});
+
+$("#button-help").focus(function(){
+
+});
+
+$("#button-about").focus(function(){
+
+});
+
+$("#button-settings").focus(function(){
+
+});
+
+
+// Leaderboard Focus
 $("#button-global").focus(function(){
   generateleaderboard();
 });

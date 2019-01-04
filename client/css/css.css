@@ -20,7 +20,6 @@ h1 {
 
 h2 {
   font-size: 500%;
-  text-shadow: -2px 0 #fffa00, 0 2px #fffa00, 2px 0 #fffa00, 0 -2px #fffa00;
 }
 
 h3 {
@@ -35,6 +34,10 @@ p {
 .text-leaderboard{
   font-size: 100%;
   margin-right: 10px;
+}
+
+.shadow {
+  text-shadow: -2px 0 #fffa00, 0 2px #fffa00, 2px 0 #fffa00, 0 -2px #fffa00;
 }
 
 div {
@@ -66,6 +69,22 @@ img {
   max-width: 40vw;
 }
 
+.score {
+  position: fixed;
+  bottom: 0;
+  right: 100px;
+}
+
+.highscore {
+  position: fixed;
+  bottom: 0;
+  left: 100px;
+}
+
+#info-push{
+  animation: blinkingText 0.8s linear infinite;
+
+}
 
 #overall-scores {}
 
@@ -106,7 +125,7 @@ img {
     }
 
     .button-gamestart{
-      margin-top: 3rem;
+      margin-top: 10rem;
       font-size:75px;
     }
 
@@ -180,47 +199,47 @@ img {
     /* Modal Content/Box */
     .modal-content {
       background-color: black;
-      margin: 40vh auto; /* 15% from the top and centered */
+      margin: 25vh auto; /* 15% from the top and centered */
       padding: 15px;
       padding-top: 0px;
       border: 5px solid black;
-      width: 40%; /* Could be more or less, depending on screen size */
-      height: 380px;
+      width: 80%; /* Could be more or less, depending on screen size */
+      height: 550px;
       border: solid 10px;
       border-color: #FF0092;
     }
 
 
     /*
-        .playerButton:hover {
-          background:-webkit-gradient(linear, left top, left bottom, color-stop(0.2, #f94bce), color-stop(1, #f94bce));
-          background:-moz-linear-gradient(top, #f94bce 20%, #f94bce 100%);
-          background:-webkit-linear-gradient(top, #f94bce 20%, #f94bce 100%);
-          background:-o-linear-gradient(top, #f94bce 20%, #f94bce 100%);
-          background:-ms-linear-gradient(top, #f94bce 20%, #f94bce 100%);
-          background:linear-gradient(to bottom, #f94bce 20%, #f94bce 100%);
-          filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f94bce', endColorstr='#f94bce',GradientType=0);
-        }
+    .playerButton:hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.2, #f94bce), color-stop(1, #f94bce));
+    background:-moz-linear-gradient(top, #f94bce 20%, #f94bce 100%);
+    background:-webkit-linear-gradient(top, #f94bce 20%, #f94bce 100%);
+    background:-o-linear-gradient(top, #f94bce 20%, #f94bce 100%);
+    background:-ms-linear-gradient(top, #f94bce 20%, #f94bce 100%);
+    background:linear-gradient(to bottom, #f94bce 20%, #f94bce 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f94bce', endColorstr='#f94bce',GradientType=0);
+  }
 
-        .playerButton:focus {
-          background:-webkit-gradient(linear, left top, left bottom, color-stop(0.2, #f94bce), color-stop(1, #f94bce));
-          background:-moz-linear-gradient(top, #f94bce 20%, #f94bce 100%);
-          background:-webkit-linear-gradient(top, #f94bce 20%, #f94bce 100%);
-          background:-o-linear-gradient(top, #f94bce 20%, #f94bce 100%);
-          background:-ms-linear-gradient(top, #f94bce 20%, #f94bce 100%);
-          background:linear-gradient(to bottom, #f94bce 20%, #f94bce 100%);
-          filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f94bce', endColorstr='#f94bce',GradientType=0);
-          background-color:#f94bce;
-        }
-    */
+  .playerButton:focus {
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.2, #f94bce), color-stop(1, #f94bce));
+  background:-moz-linear-gradient(top, #f94bce 20%, #f94bce 100%);
+  background:-webkit-linear-gradient(top, #f94bce 20%, #f94bce 100%);
+  background:-o-linear-gradient(top, #f94bce 20%, #f94bce 100%);
+  background:-ms-linear-gradient(top, #f94bce 20%, #f94bce 100%);
+  background:linear-gradient(to bottom, #f94bce 20%, #f94bce 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f94bce', endColorstr='#f94bce',GradientType=0);
+  background-color:#f94bce;
+}
+*/
 
 
 progress[value] {
   -webkit-appearance: none;
-   appearance: none;
+  appearance: none;
 
-    width: 500px;
-    height: 50px;
+  width: 500px;
+  height: 50px;
 }
 
 progress[value]::-webkit-progress-bar {
@@ -234,21 +253,21 @@ progress[value]::-webkit-progress-bar {
 progress[value]::-webkit-progress-value {
   background-image:
 
-	   -webkit-linear-gradient(top,
-	                           rgba(255, 255, 255, 0.5),
-	                           rgba(0, 0, 0, 0.1)),
-	   -webkit-linear-gradient(top, #fffa00, #f00843);
+  -webkit-linear-gradient(top,
+    rgba(255, 255, 255, 0.5),
+    rgba(0, 0, 0, 0.1)),
+    -webkit-linear-gradient(top, #fffa00, #f00843);
 
     border-radius: 1px;
     background-size: 100px 200px, 100% 100%, 100% 100%;
 
     -webkit-animation: animate-stripes 5s linear infinite;
-        animation: animate-stripes 5s linear infinite;
-}
+    animation: animate-stripes 5s linear infinite;
+  }
 
-/*
+  /*
 
-progress[value]::-webkit-progress-value::before {
+  progress[value]::-webkit-progress-value::before {
   content: '80%';
   position: absolute;
   right: 0;

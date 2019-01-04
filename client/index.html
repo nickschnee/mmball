@@ -29,11 +29,12 @@
     <!-- Modal content -->
     <div class="modal-content">
 
-      <h3>Bern</h3>
+      <p>mmball.ch</p>
 
-      <button type="button" class="playerButton">Quit</button>
-      <button type="button" class="playerButton">Troubleshoot</button>
-      <button type="button" class="playerButton">Change Location</button>
+      <button id="button-quit" type="button" class="playerButton">quit</button>
+      <button id="button-help" type="button" class="playerButton">help</button>
+      <button id="button-about" type="button" class="playerButton">about</button>
+      <button id="button-settings" type="button" class="playerButton">settings</button>
 
     </div>
 
@@ -57,17 +58,15 @@
     <!-- InGame -->
 
     <h2 class="game-start hidden"> <span id="gameinfo"> READY WHEN YOU ARE </span></h2>
-    <p class="game-start hidden"> PUSH THE BUTTON TO START </p>
+    <p class="game-start hidden" id="info-push"> PRESS THE MASSIVE RED ARCADE BUTTON TO START </p>
     <button type="button" class="game-start hidden" onclick="simulatebuzzer()"> BUZZER</button>
 
 
     <p class="game-intro hidden" id="pregame-countdown"> </p>
 
+    <p class="game hidden score">Score: <span id="score"> 0 </span> </p>
     <progress class="game hidden" value="0" max="50" id="progressBar"></progress>
-    <p class="game hidden">Dein Punktestand: <span id="score"> 0 </span> </p>
     <!-- <button type="button" class="game hidden" onclick="simulatescore()"> SCORE +10</button> -->
-
-
 
   </div>
   <!-- ENDE InGame -->
