@@ -120,6 +120,14 @@ function play(){
   // This can be used to show different score animations depending on which pipe was hit
   socket.on('lastgoal', function(lastgoal) {
     console.log("Der letzte Treffer gab " + lastgoal + " Punkte");
+
+    if (lastgoal == 25){
+      console.log("GIF");
+
+      //$("#gif").attr("src", "images/100.gif");
+      $("<img src='images/100.gif' alt='GIF'>").appendTo(".gifspace");
+    };
+
   });
 
   var lefttime = 10;
@@ -131,7 +139,7 @@ function play(){
       clearInterval(Timerdownload);
       console.log("Game fertig.")
       gamefinish = true;
-      //window.location.href = 'http://www.google.com';
+
       $('#scoreboard').toggleClass("hidden");
       $('.button-gamestart').removeAttr("autofocus");
       $('#ingame').toggleClass("hidden");
@@ -185,12 +193,15 @@ $(document).keydown(
       $(".move:focus").prev().focus();
     }
 
-    if (e.keyCode == 27) {
+    //Open the Settings Window when ESCAPE is presseed.
+    if (e.keyCode == 27 && $("#myModal").hasClass("hidden")) {
+      $('#myModal').toggleClass("hidden");
+      $('#button-quit').focus();
+    } else if (e.keyCode == 27 && !$("#myModal").hasClass("hidden")){
       $('#myModal').toggleClass("hidden");
     }
 
-  }
-);
+  });
 
 // Write Player to Database when pressing Enter on Input field
 $('table').on("change keyup", function(e) {

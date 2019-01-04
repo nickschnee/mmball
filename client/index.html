@@ -29,12 +29,10 @@
     <!-- Modal content -->
     <div class="modal-content">
 
-      <p>mmball.ch</p>
-
-      <button id="button-quit" type="button" class="playerButton">quit</button>
-      <button id="button-help" type="button" class="playerButton">help</button>
-      <button id="button-about" type="button" class="playerButton">about</button>
-      <button id="button-settings" type="button" class="playerButton">settings</button>
+      <button id="button-quit" type="button" class="playerButton move">quit</button>
+      <button id="button-help" type="button" class="playerButton move">help</button>
+      <button id="button-about" type="button" class="playerButton move">about</button>
+      <button id="button-settings" type="button" class="playerButton move">settings</button>
 
     </div>
 
@@ -63,6 +61,11 @@
 
 
     <p class="game-intro hidden" id="pregame-countdown"> </p>
+
+
+    <div class="gifspace"> </div>
+
+
 
     <p class="game hidden score">Score: <span id="score"> 0 </span> </p>
     <progress class="game hidden" value="0" max="50" id="progressBar"></progress>
