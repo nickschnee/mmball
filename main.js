@@ -119,6 +119,7 @@ function thegame(){
         score = 0;
         gamerunning = false;
         countdownstarted = false;
+        singleplayer = false;
 
         thegame(); // start thegame() new
 

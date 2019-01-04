@@ -43,6 +43,7 @@ var lastKnownKey; // saves last seen key of a node to push into array
 var keyarray = []; // saves all keys which have been pushed into the array
 var devicelocation = "Bern"; // set the location of this device
 var highscore; // get the highscore from database gethighscore() to display at the beginning
+var body;
 
 /*socket.on('sensor-status', function(data) {
 console.log("Ein Empfängnis! " + data);
@@ -304,13 +305,6 @@ $(document).keydown(
   function newgame(){
     console.log("NEW GAME");
 
-    // reset visuals
-    $('.button-gamestart').removeClass("hidden");
-    $('#ingame').removeClass("hidden");
-    $('.ingameelement').addClass("hidden");
-    $('#scoreboard').addClass("hidden");
-    $('#button-newgame').removeClass("hidden");
-
     buttonstatus = false;
     gamestart = false;
     gamefinish = false;
@@ -325,7 +319,11 @@ $(document).keydown(
 
     socket.emit('newgame', true);
 
+    $("body").empty();
     location.reload();
+
+    $(".modal").addClass("hidden");
+    $('#singleplayerbutton').focus();
   }
 
   function generatewinnerboard(){

@@ -2,41 +2,41 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- shrink-to-fit=no -->
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'> <!-- shrink-to-fit=no -->
   <title>mmball.ch</title>
-  <!--<link href="css/desktop_style.css" rel="stylesheet" type="text/css">
-  <link href="css/mobile_style.css" rel="stylesheet" type="text/css">-->
-  <link href="css/gameplay_style.css" rel="stylesheet" type="text/css">
-  <!-- <link href="css/logo.css" rel="stylesheet" type="text/css"> -->
-  <link href="css/css.css" rel="stylesheet" type="text/css">
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+  <!--<link href='css/desktop_style.css' rel='stylesheet' type='text/css'>
+  <link href='css/mobile_style.css' rel='stylesheet' type='text/css'>-->
+  <link href='css/gameplay_style.css' rel='stylesheet' type='text/css'>
+  <!-- <link href='css/logo.css' rel='stylesheet' type='text/css'> -->
+  <link href='css/css.css' rel='stylesheet' type='text/css'>
+  <!-- <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script> -->
 
-  <script src="js/jquery.min.js"></script>
+  <script src='js/jquery.min.js'></script>
   <!--Schriften-->
-  <link href="https://fonts.googleapis.com/css?family=Chakra+Petch|Permanent+Marker|VT323" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Mr+Dafoe" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Titillium+Web:900" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Chakra+Petch|Permanent+Marker|VT323' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Mr+Dafoe' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Titillium+Web:900' rel='stylesheet'>
 
 </head>
 
 <body>
 
   <!-- The Modal -->
-  <div id="myModal" class="modal hidden">
+  <div id='myModal' class='modal hidden'>
 
     <!-- Modal content -->
-    <div class="modal-content">
+    <div class='modal-content'>
 
-      <button id="button-quit" type="button" class="playerButton move" onclick="newgame()">quit</button>
-      <button id="button-help" type="button" class="playerButton move">help</button>
-      <button id="button-about" type="button" class="playerButton move">about</button>
-      <button id="button-settings" type="button" class="playerButton" onclick="adminmode()">settings</button>
+      <button id='button-quit' type='button' class='playerButton move' onclick='newgame()'>quit</button>
+      <button id='button-help' type='button' class='playerButton move'>help</button>
+      <button id='button-about' type='button' class='playerButton move'>about</button>
+      <button id='button-settings' type='button' class='playerButton' onclick='adminmode()'>settings</button>
 
-      <div id="modal-text">
+      <div id='modal-text'>
 
-        <article class="quit hidden">
+        <article class='quit hidden'>
 
           <p> press ENTER to confirm quit <br>
             your current game score will be lost </p>
@@ -45,28 +45,27 @@
 
           </article>
 
-          <article class="help hidden">
+          <article class='help hidden'>
 
             <p> Hallo Welt </p>
 
           </article>
 
-          <article class="about hidden">
+          <article class='about hidden'>
 
             <p> Bonjour Monde </p>
 
           </article>
 
-          <article class="settings hidden">
+          <article class='settings hidden'>
 
-            <p> your current location is <span id="span-location"> </span> </p>
+            <p> your current location is <span id='span-location'> </span> </p>
 
             <p>press ENTER to change location</p>
 
-            <input id="input-admin" type="text" name="" value="" >
+            <input id='input-admin' type='text' name='' value='' >
 
           </article>
-
 
         </div>
 
@@ -75,98 +74,94 @@
     </div>
 
     <!-- Logo Titel -->
-    <div class="MMBall-logo">
-      <img src="images/mmball_logo.gif" alt="Logo MMBall">
+    <div class='MMBall-logo'>
+      <img src='images/mmball_logo.gif' alt='Logo MMBall'>
     </div>
 
-    <p class="highscore">Highscore: <span id="highscore"></span> </p>
+    <p class='highscore'>Highscore: <span id='highscore'></span> </p>
     <!-- ENDE Logo Titel -->
 
-    <div id="ingame" class="">
 
-      <div class="flexbox">
-        <button autofocus type="button" class="playerButton button-gamestart move" id="singleplayerbutton">1 Player</button>
-        <button type="button" class="playerButton button-gamestart move" id="multiplayerbutton">2 Players</button>
-      </div>
+      <div id='ingame' class=''>
 
-      <!-- InGame -->
+        <div class='flexbox'>
+          <button autofocus type='button' class='playerButton button-gamestart move' id='singleplayerbutton'>1 Player</button>
+          <button type='button' class='playerButton button-gamestart move' id='multiplayerbutton'>2 Players</button>
+        </div>
 
-      <h2 class="game-start hidden"> <span id="gameinfo"> READY WHEN YOU ARE </span></h2>
-      <p class="game-start hidden" id="info-push"> PRESS THE MASSIVE RED ARCADE BUTTON TO START </p>
-      <button type="button" class="game-start hidden" onclick="simulatebuzzer()"> BUZZER</button>
+        <!-- InGame -->
 
-
-      <p class="game-intro hidden" id="pregame-countdown"> </p>
+        <h2 class='game-start hidden'> <span id='gameinfo'> READY WHEN YOU ARE </span></h2>
+        <p class='game-start hidden' id='info-push'> PRESS THE MASSIVE RED ARCADE BUTTON TO START </p>
+        <button type='button' class='game-start hidden' onclick='simulatebuzzer()'> BUZZER</button>
 
 
-      <div class="gifspace"> </div>
+        <p class='game-intro hidden' id='pregame-countdown'> </p>
+
+
+        <div class='gifspace'> </div>
 
 
 
-      <p class="game hidden score">Score: <span id="score"> 0 </span> </p>
-      <progress class="game hidden" value="0" max="9" id="progressBar"></progress>
-      <!-- <button type="button" class="game hidden" onclick="simulatescore()"> SCORE +10</button> -->
-
-    </div>
-    <!-- ENDE InGame -->
-
-    <!-- Figg Git -->
-
-
-    <!-- Scoreboard -->
-
-    <div id="scoreboard" class="hidden">
-
-      <button id="button-global" class="playerButton move" onclick="generateleaderboard()" type="button">GLOBAL</button>
-      <button id="button-chur" class="playerButton move" onclick="generateleaderboardchur()" type="button">CHUR</button>
-      <button id="button-bern" class="playerButton move" onclick="generateleaderboardbern()" type="button">BERN</button>
-      <button id="button-newgame" class="playerButton move" id="button-newgame" onclick="newgame()" type="button">EXIT</button>
-
-      <div class="leaderboard">
-
-        <table id="players">
-          <tr>
-            <th>Rank</th>
-            <th>Score</th>
-            <th>Name</th>
-            <th>Location</th>
-          </tr>
-
-        </table>
-
-        <!-- <ol id="players" class="list-group"> -->
-        <!-- Contact Object li.list-group-item.contact will be added here by js -->
-        <!-- </ol> -->
+        <p class='game hidden score'>Score: <span id='score'> 0 </span> </p>
+        <progress class='game hidden' value='0' max='9' id='progressBar'></progress>
+        <!-- <button type='button' class='game hidden' onclick='simulatescore()'> SCORE +10</button> -->
 
       </div>
+      <!-- ENDE InGame -->
 
-      <div id="text-playagain" class="hidden">
+      <!-- Figg Git -->
 
-        <p>Press ENTER to confirm exit</p>
+
+      <!-- Scoreboard -->
+
+      <div id='scoreboard' class='hidden'>
+
+        <button id='button-global' class='playerButton move' onclick='generateleaderboard()' type='button'>GLOBAL</button>
+        <button id='button-chur' class='playerButton move' onclick='generateleaderboardchur()' type='button'>CHUR</button>
+        <button id='button-bern' class='playerButton move' onclick='generateleaderboardbern()' type='button'>BERN</button>
+        <button id='button-newgame' class='playerButton move' id='button-newgame' onclick='newgame()' type='button'>EXIT</button>
+
+        <div class='leaderboard'>
+
+          <table id='players'>
+            <tr>
+              <th>Rank</th>
+              <th>Score</th>
+              <th>Name</th>
+              <th>Location</th>
+            </tr>
+
+          </table>
+
+        </div>
+
+        <div id='text-playagain' class='hidden'>
+
+          <p>Press ENTER to confirm exit</p>
+
+        </div>
 
       </div>
-
-    </div>
-    <!-- ENDE Scoreboard -->
-
+      <!-- ENDE Scoreboard -->
 
     <!-- Gridanimation -->
-    <!-- <div class="grid"></div> -->
+    <!-- <div class='grid'></div> -->
 
     <!-- Sterne -->
-    <canvas id="canvas"></canvas>
+    <canvas id='canvas'></canvas>
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script> -->
+    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js'></script> -->
 
     <!-- Include Firebase Library -->
-    <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
+    <script src='https://www.gstatic.com/firebasejs/4.5.0/firebase.js'></script>
 
-    <!-- <script src="firebase.js"></script> -->
+    <!-- <script src='firebase.js'></script> -->
 
-    <script src="js/socket.io.js"></script>
-    <script src="js/canvas_app.js"></script>
+    <script src='js/socket.io.js'></script>
+    <script src='js/canvas_app.js'></script>
 
-    <script src="index.js"></script>
+    <script src='index.js'></script>
 
   </body>
 
