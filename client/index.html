@@ -29,10 +29,46 @@
     <!-- Modal content -->
     <div class="modal-content">
 
-      <button id="button-quit" type="button" class="playerButton move">quit</button>
+      <button id="button-quit" type="button" class="playerButton move" onclick="newgame()">quit</button>
       <button id="button-help" type="button" class="playerButton move">help</button>
       <button id="button-about" type="button" class="playerButton move">about</button>
-      <button id="button-settings" type="button" class="playerButton move">settings</button>
+      <button id="button-settings" type="button" class="playerButton" onclick="adminmode()">settings</button>
+
+      <div id="modal-text">
+
+        <article class="quit hidden">
+
+          <p> press ENTER to confirm quit <br>
+           your current game score will be lost </p>
+
+          <p> press ESCAPE to close this window </p>
+
+        </article>
+
+        <article class="help hidden">
+
+          <p> Hallo Welt </p>
+
+        </article>
+
+        <article class="about hidden">
+
+          <p> Bonjour Monde </p>
+
+        </article>
+
+        <article class="settings hidden">
+
+          <p> your current location is <span id="span-location"> </span> </p>
+
+          <p>press ENTER to change location</p>
+
+          <input id="input-admin" type="text" name="" value="" ">
+
+        </article>
+
+
+      </div>
 
     </div>
 
