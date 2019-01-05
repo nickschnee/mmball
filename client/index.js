@@ -131,9 +131,9 @@ function play(){
 
   });
 
-  var lefttime = 10;
+  var lefttime = 30;
   var Timerdownload = setInterval(function(){
-    document.getElementById("progressBar").value = 10 - --lefttime;
+    document.getElementById("progressBar").value = 30 - --lefttime;
 
     if(lefttime <= 0){
       socket.emit('gamestart', false);
