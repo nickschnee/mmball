@@ -167,28 +167,42 @@ function play(){
       console.log("Game fertig.")
       gamefinish = true;
 
-      $('#scoreboard').toggleClass("hidden");
-      $('.button-gamestart').removeAttr("autofocus");
-      $('#ingame').toggleClass("hidden");
-      $('.highscore').toggleClass("hidden");
+      // prepare GIF container for fullscreen GIF
+      // add fullscreen GIF
+      $('.highscore').addClass("hidden");
 
-      // Display Leaderboard
-      getrank(endscore);
+      $("#gif").addClass("endgif");
+      $("#gif").attr("src", "images/bern_gewinnt.gif");
+      $('#ingame').addClass("hidden");
+
 
       setTimeout(function(){
-        if (myrank > 10 || alreadyinserted){
-          generateleaderboard();
-        } else {
-          generatewinnerboard();
-        }
+
+        $("#gif").attr("src", " ");
+
+        $('#scoreboard').toggleClass("hidden");
+        $('.button-gamestart').removeAttr("autofocus");
+
+        // Display Leaderboard
+        getrank(endscore);
 
         setTimeout(function(){
-          $('#playerinput').focus();
+
+          if (myrank > 10 || alreadyinserted){
+            generateleaderboard();
+          } else {
+            generatewinnerboard();
+          }
+
+          setTimeout(function(){
+            $('#playerinput').focus();
+
+          }, 1000);
 
         }, 1000);
+        // end Display Leaderboard
 
-      }, 1000);
-      // end Display Leaderboard
+      }, 10000); // end of endgif
 
       return;
     }
@@ -330,9 +344,9 @@ $(document).keydown(
 
   function gifcountdown(){
     console.log("This GIF will be removed!");
-     setTimeout(function(){
+    setTimeout(function(){
 
-       $("#gif").attr("src", "");
+      $("#gif").attr("src", "");
 
     }, 5000);
   }
