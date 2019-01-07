@@ -82,68 +82,67 @@
     <!-- ENDE Logo Titel -->
 
 
-      <div id='ingame' class=''>
+    <div id='ingame' class=''>
 
-        <div class='flexbox'>
-          <button autofocus type='button' class='playerButton button-gamestart move' id='singleplayerbutton'>1 Player</button>
-          <button type='button' class='playerButton button-gamestart move' id='multiplayerbutton'>2 Players</button>
-        </div>
+      <div class='flexbox'>
+        <button autofocus type='button' class='playerButton button-gamestart move' id='singleplayerbutton'>Play</button>
+        <button type='button' class='playerButton button-gamestart move' id='leaderboardbutton'>Leaderboards</button>
+      </div>
 
-        <!-- InGame -->
+      <!-- InGame -->
 
-        <h2 class='game-start hidden'> <span id='gameinfo'> READY WHEN YOU ARE </span></h2>
-        <p class='game-start hidden' id='info-push'> PRESS THE MASSIVE RED ARCADE BUTTON TO START </p>
-        <button type='button' class='game-start hidden' onclick='simulatebuzzer()'> BUZZER</button>
-
-
-        <p class='game-intro hidden' id='pregame-countdown'> </p>
+      <h2 class='game-start hidden'> <span id='gameinfo'> READY WHEN YOU ARE </span></h2>
+      <p class='game-start hidden' id='info-push'> PRESS THE MASSIVE RED ARCADE BUTTON TO START </p>
+      <button type='button' class='game-start hidden' onclick='simulatebuzzer()'> BUZZER</button>
 
 
-        <div class='gifspace'> </div>
+      <p class='game-intro hidden' id='pregame-countdown'> </p>
+
+      <div class='gifspace'> </div>
 
 
 
-        <p class='game hidden score'>Score: <span id='score'> 0 </span> </p>
-        <progress class='game hidden' value='0' max='29' id='progressBar'></progress>
-        <!-- <button type='button' class='game hidden' onclick='simulatescore()'> SCORE +10</button> -->
+      <p class='game hidden score'>Score: <span id='score'> 0 </span> </p>
+      <progress class='game hidden' value='0' max='29' id='progressBar'></progress>
+      <!-- <button type='button' class='game hidden' onclick='simulatescore()'> SCORE +10</button> -->
+
+    </div>
+    <!-- ENDE InGame -->
+
+    <!-- Figg Git -->
+
+
+    <!-- Scoreboard -->
+
+    <div id='scoreboard' class='hidden'>
+
+      <button id='button-global' class='playerButton move' onclick='generateleaderboard()' type='button'>GLOBAL</button>
+      <button id='button-chur' class='playerButton move' onclick='generateleaderboardchur()' type='button'>CHUR</button>
+      <button id='button-bern' class='playerButton move' onclick='generateleaderboardbern()' type='button'>BERN</button>
+      <button id='button-newgame' class='playerButton move' id='button-newgame' onclick='newgame()' type='button'>EXIT</button>
+
+      <div class='leaderboard'>
+
+        <table id='players'>
+          <tr>
+            <th>Rank</th>
+            <th>Score</th>
+            <th>Name</th>
+            <th>Location</th>
+          </tr>
+
+        </table>
 
       </div>
-      <!-- ENDE InGame -->
 
-      <!-- Figg Git -->
+      <div id='text-playagain' class='hidden'>
 
-
-      <!-- Scoreboard -->
-
-      <div id='scoreboard' class='hidden'>
-
-        <button id='button-global' class='playerButton move' onclick='generateleaderboard()' type='button'>GLOBAL</button>
-        <button id='button-chur' class='playerButton move' onclick='generateleaderboardchur()' type='button'>CHUR</button>
-        <button id='button-bern' class='playerButton move' onclick='generateleaderboardbern()' type='button'>BERN</button>
-        <button id='button-newgame' class='playerButton move' id='button-newgame' onclick='newgame()' type='button'>EXIT</button>
-
-        <div class='leaderboard'>
-
-          <table id='players'>
-            <tr>
-              <th>Rank</th>
-              <th>Score</th>
-              <th>Name</th>
-              <th>Location</th>
-            </tr>
-
-          </table>
-
-        </div>
-
-        <div id='text-playagain' class='hidden'>
-
-          <p>Press ENTER to confirm exit</p>
-
-        </div>
+        <p>Press ENTER to confirm exit</p>
 
       </div>
-      <!-- ENDE Scoreboard -->
+
+    </div>
+    <!-- ENDE Scoreboard -->
 
     <!-- Gridanimation -->
     <!-- <div class='grid'></div> -->

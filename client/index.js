@@ -56,6 +56,20 @@ $(document).ready(function(){
 
   gethighscore();
 
+  $('#leaderboardbutton').click(function(){
+    $('.button-gamestart').toggleClass("hidden");
+    $('#scoreboard').toggleClass("hidden");
+    $('.highscore').toggleClass("hidden");
+
+    alreadyinserted = true;
+
+    //generateleaderboard();
+    $('#button-global').focus();
+
+    console.log("I'm here!");
+
+  });
+
   $('#singleplayerbutton').click(function(){
     socket.emit('singleplayer', true);
     $('.button-gamestart').toggleClass("hidden");
@@ -69,7 +83,9 @@ socket.on('button-status', function(buttonstatus) {
 
   // When Buzzer is Pushed, Show Third Screen
   $(".game-start").toggleClass('hidden');
-  $("#pregame-countdown").toggleClass('hidden');
+  $(".game-intro").toggleClass('hidden');
+  $("<img class='gif' src='images/100.gif' alt='GIF'>").appendTo(".gifspace");
+
   gameintro();
 
 });
@@ -79,7 +95,7 @@ function gameintro () {
   var timeleft = 10;
   var downloadTimer = setInterval(function(){
     timeleft--;
-    document.getElementById("pregame-countdown").textContent = "Game starting in " + timeleft + " Seconds";
+    // document.getElementById("pregame-countdown").textContent = "Game starting in " + timeleft + " Seconds";
 
     if(timeleft <= 0){
       gamestart = true;
@@ -100,6 +116,9 @@ function play(){
   console.log("Lasst die Spiele beginnen!");
   $(".game-intro").toggleClass("hidden");
   $(".game").toggleClass("hidden");
+  $(".gif").remove();
+
+
 
   // Receiving absolute score from server
   // The score is pushed into HTML
@@ -125,8 +144,7 @@ function play(){
     if (lastgoal == 25){
       console.log("GIF");
 
-      //$("#gif").attr("src", "images/100.gif");
-      $("<img src='images/100.gif' alt='GIF'>").appendTo(".gifspace");
+      $("<img class='gif' src='images/100.gif' alt='GIF'>").appendTo(".gifspace");
     };
 
   });
@@ -418,6 +436,8 @@ $(document).keydown(
 
   function generateleaderboard(){
 
+    console.log("generating leaderboard");
+
     absoluterank = 0;
 
     // First delete old leaderboard if it exists.
@@ -599,7 +619,7 @@ $(document).keydown(
   function simulatebuzzer(){
     // When Buzzer is Pushed, Show Third Screen
     $(".game-start").toggleClass('hidden');
-    $("#pregame-countdown").toggleClass('hidden');
+    $(".game-intro").toggleClass('hidden');
     gameintro();
   }
 

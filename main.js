@@ -53,12 +53,14 @@ function thegame(){
   board.on('ready', function () {
     sensor1 = new five.Sensor.Digital({
       pin: 'P1-11',
-      freq: 10,
+      freq: 1,
+      threshold: 0.05,
     });
 
     sensor2 = new five.Sensor.Digital({
       pin: 'P1-7',
-      freq: 10,
+      freq: 1,
+      threshold: 0.05,
     });
 
     button = new five.Button('P1-40')
@@ -76,58 +78,63 @@ function thegame(){
     // Sensoren aktivieren
     sensor1.on("change", function() {
       brightness = this.value;
+      console.log("Sensor 1: Die Helligkeit ist: " + this.value);
 
-      if (brightness == 0 && gamerunning){
-        console.log('SCORE IN PIPE A + 10 Points');
-        score = score + 10;
-        console.log(score);
-        io.emit('score', score);
-        io.emit('lastgoal', 10);
-      };
-    });
+      //if (brightness == 0 && gamerunning){
+        if (brightness == 0 && gamerunning){
+          console.log('SCORE IN PIPE A + 10 Points');
 
-    sensor2.on("change", function() {
-      brightness = this.value;
+          score = score + 10;
+          console.log(score);
+          io.emit('score', score);
+          io.emit('lastgoal', 10);
+        };
+      });
 
-      if (brightness == 0 && gamerunning){
-        console.log('SCORE IN PIPE B + 25 Points');
-        score = score + 25;
-        console.log(score);
-        io.emit('score', score);
-        io.emit('lastgoal', 25);
-      };
-    });
+      sensor2.on("change", function() {
+        brightness = this.value;
+        console.log("Sensor 2: Die Helligkeit ist: " + this.value);
 
-    io.on('connection', function(socket) {
+        if (brightness == 0 && gamerunning){
+          console.log('SCORE IN PIPE B + 25 Points');
 
-      socket.on('singleplayer', function(newgame){
-        console.log("Singleplayer");
-        singleplayer = true;
+          score = score + 25;
+          console.log(score);
+          io.emit('score', score);
+          io.emit('lastgoal', 25);
+        };
+      });
 
-      }); // ENDE Function singleplayer
+      io.on('connection', function(socket) {
 
-      socket.on('gamestart', function(gamestart){
-        //console.log("Das funktioniert so toll!");
-        gamerunning = gamestart;
-        console.log("das game läuft:" + gamerunning);
+        socket.on('singleplayer', function(newgame){
+          console.log("Singleplayer");
+          singleplayer = true;
 
-      }); // ENDE Function gamestart
+        }); // ENDE Function singleplayer
 
-      socket.on('newgame', function(newgame){
-        console.log("NEW GAME");
+        socket.on('gamestart', function(gamestart){
+          //console.log("Das funktioniert so toll!");
+          gamerunning = gamestart;
+          console.log("das game läuft:" + gamerunning);
 
-        score = 0;
-        gamerunning = false;
-        countdownstarted = false;
-        singleplayer = false;
+        }); // ENDE Function gamestart
 
-        thegame(); // start thegame() new
+        socket.on('newgame', function(newgame){
+          console.log("NEW GAME");
 
-      }); // ENDE Function gamestart
+          score = 0;
+          gamerunning = false;
+          countdownstarted = false;
+          singleplayer = false;
 
-    }); //ENDE IO CONNECTION
-  }); // ENDE BOARD
+          thegame(); // start thegame() new
 
-}; // ENDE thegame()
+        }); // ENDE Function gamestart
 
-// SOCKET
+      }); //ENDE IO CONNECTION
+    }); // ENDE BOARD
+
+  }; // ENDE thegame()
+
+  // SOCKET
