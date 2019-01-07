@@ -54,6 +54,8 @@ document.getElementById("score").innerHTML = data;
 // First Screen
 $(document).ready(function(){
 
+  socket.emit('newgame', true);
+
   gethighscore();
 
   $('#leaderboardbutton').click(function(){
@@ -145,7 +147,7 @@ function play(){
   socket.on('lastgoal', function(lastgoal) {
     console.log("Der letzte Treffer gab " + lastgoal + " Punkte");
 
-    if (lastgoal == 25){
+    if (lastgoal == 25 && !gamefinish){
       console.log("GIF");
 
       //$("<img class='gif' src='images/100.gif' alt='GIF'>").appendTo(".gifspace");
@@ -157,9 +159,9 @@ function play(){
 
   });
 
-  var lefttime = 30;
+  var lefttime = 60;
   var Timerdownload = setInterval(function(){
-    document.getElementById("progressBar").value = 30 - --lefttime;
+    document.getElementById("progressBar").value = 60 - --lefttime;
 
     if(lefttime <= 0){
       socket.emit('gamestart', false);
@@ -172,9 +174,15 @@ function play(){
       $('.highscore').addClass("hidden");
 
       $("#gif").addClass("endgif");
-      $("#gif").attr("src", "images/bern_gewinnt.gif");
       $('#ingame').addClass("hidden");
 
+      if (endscore > highscore){
+
+        $("#gif").attr("src", "images/bern_gewinnt.gif");
+
+      } else if (endscore <= highscore){
+        $("#gif").attr("src", "images/nohighscore.gif");
+      }
 
       setTimeout(function(){
 
@@ -186,6 +194,7 @@ function play(){
         // Display Leaderboard
         getrank(endscore);
 
+        // wegen DB latenz eine sekunde puffer einbauen
         setTimeout(function(){
 
           if (myrank > 10 || alreadyinserted){
@@ -194,6 +203,7 @@ function play(){
             generatewinnerboard();
           }
 
+          // wegen DB latenz eine sekunde puffer einbauen
           setTimeout(function(){
             $('#playerinput').focus();
 
@@ -207,7 +217,7 @@ function play(){
       return;
     }
 
-  },1000);
+  },1000); //end of interval
 
 };
 
@@ -372,8 +382,8 @@ $(document).keydown(
     $("body").empty();
     location.reload();
 
-    $(".modal").addClass("hidden");
-    $('#singleplayerbutton').focus();
+    // $(".modal").addClass("hidden");
+    // $('#singleplayerbutton').focus();
   }
 
   function generatewinnerboard(){
