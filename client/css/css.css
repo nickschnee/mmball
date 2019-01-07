@@ -65,8 +65,17 @@ th{
   color: #fffa00;
 }
 
-img {
+.logo{
   max-width: 40vw;
+
+}
+
+/* img {
+max-width: 40vw;
+} */
+
+.gif{
+  width: 100%;
 }
 
 .score {

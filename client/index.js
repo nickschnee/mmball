@@ -84,7 +84,10 @@ socket.on('button-status', function(buttonstatus) {
   // When Buzzer is Pushed, Show Third Screen
   $(".game-start").toggleClass('hidden');
   $(".game-intro").toggleClass('hidden');
-  $("<img class='gif' src='images/100.gif' alt='GIF'>").appendTo(".gifspace");
+
+  //$("<img class='gif' src='images/countdown.gif' alt='GIF'> width='1000px' ").appendTo(".gifspace");
+  $("#gif").attr("src", "images/countdown.gif");
+
 
   gameintro();
 
@@ -92,7 +95,7 @@ socket.on('button-status', function(buttonstatus) {
 
 // Countdown is Starting
 function gameintro () {
-  var timeleft = 10;
+  var timeleft = 12;
   var downloadTimer = setInterval(function(){
     timeleft--;
     // document.getElementById("pregame-countdown").textContent = "Game starting in " + timeleft + " Seconds";
@@ -116,7 +119,8 @@ function play(){
   console.log("Lasst die Spiele beginnen!");
   $(".game-intro").toggleClass("hidden");
   $(".game").toggleClass("hidden");
-  $(".gif").remove();
+  //$(".gif").remove();
+  $("#gif").attr("src", "");
 
 
 
@@ -144,7 +148,11 @@ function play(){
     if (lastgoal == 25){
       console.log("GIF");
 
-      $("<img class='gif' src='images/100.gif' alt='GIF'>").appendTo(".gifspace");
+      //$("<img class='gif' src='images/100.gif' alt='GIF'>").appendTo(".gifspace");
+      $("#gif").attr("src", "images/superstrike.gif");
+
+      gifcountdown();
+
     };
 
   });
@@ -319,6 +327,16 @@ $(document).keydown(
   // Functions
   // Functions
   // Functions
+
+  function gifcountdown(){
+    console.log("This GIF will be removed!");
+     setTimeout(function(){
+
+       $("#gif").attr("src", "");
+
+    }, 5000);
+  }
+
 
   function newgame(){
     console.log("NEW GAME");
