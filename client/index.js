@@ -43,17 +43,19 @@ var lastKnownKey; // saves last seen key of a node to push into array
 var keyarray = []; // saves all keys which have been pushed into the array
 var devicelocation = "Bern"; // set the location of this device
 var highscore; // get the highscore from database gethighscore() to display at the beginning
-var body;
 
-/*socket.on('sensor-status', function(data) {
-console.log("Ein Empfängnis! " + data);
-document.getElementById("score").innerHTML = data;
+var backgroundmusic;
 
-}); */
+// Load sounds
+backgroundmusic = new sound("sounds/gameplay_kung.mp3");
 
-// First Screen
+// Start Gameplay
+// Show Start Screen on Document Ready
 $(document).ready(function(){
 
+  backgroundmusic.loop();
+
+  // Reset Variables on Server
   socket.emit('newgame', true);
 
   gethighscore();
@@ -150,7 +152,6 @@ function play(){
     if (lastgoal == 25 && !gamefinish){
       console.log("GIF");
 
-      //$("<img class='gif' src='images/100.gif' alt='GIF'>").appendTo(".gifspace");
       $("#gif").attr("src", "images/superstrike.gif");
 
       gifcountdown();
@@ -221,17 +222,16 @@ function play(){
 
 };
 
+// End Gameplay
+// End Gameplay
+// End Gameplay
+// End Gameplay
 
-// ENDE GAMEPLAY
-// ENDE GAMEPLAY
-// ENDE GAMEPLAY
-
-
-// Start Eventlisteners
-// Start Eventlisteners
-// Start Eventlisteners
-// Start Eventlisteners
-// Start Eventlisteners
+// Start Keyboard Controls
+// Start Keyboard Controls
+// Start Keyboard Controls
+// Start Keyboard Controls
+// Start Keyboard Controls
 
 $(document).keydown(
   function(e)
@@ -272,8 +272,10 @@ $(document).keydown(
   $('table').on("change keyup", function(e) {
     //console.log("Input detected!")
     if (e.keyCode === 13 && $('#playerinput').val() != "" )  {
-      //console.log("ENTERED!")
       writeScore();
+    } else if (e.keyCode === 13 && $('#playerinput').val() == "" ){
+      alreadyinserted = true;
+      $('#button-global').focus();
     };
   });
 
@@ -337,20 +339,38 @@ $(document).keydown(
   });
 
 
-  // Ende Eventlisteners
-  // Ende Eventlisteners
-  // Ende Eventlisteners
-  // Ende Eventlisteners
-  // Ende Eventlisteners
+  // End Keyboard Controls
+  // End Keyboard Controls
+  // End Keyboard Controls
+  // End Keyboard Controls
 
-  // Functions
-  // Functions
-  // Functions
-  // Functions
-  // Functions
-  // Functions
-  // Functions
-  // Functions
+  // Start Functions
+  // Start Functions
+  // Start Functions
+  // Start Functions
+
+  function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+
+    this.play = function(){
+      this.sound.play();
+    }
+
+    this.loop = function(){
+      this.sound.play();
+      this.sound.setAttribute("loop", "true");
+    }
+
+    this.stop = function(){
+      this.sound.pause();
+    }
+
+  }
 
   function gifcountdown(){
     console.log("This GIF will be removed!");
