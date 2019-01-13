@@ -99,7 +99,7 @@ socket.on('button-status', function(buttonstatus) {
 // Countdown is Starting
 function gameintro () {
   music_intro.stop();
-  music_gameplay.loop();
+  music_gameplay.play();
 
   var timeleft = 12;
   var downloadTimer = setInterval(function(){
@@ -155,7 +155,10 @@ function play(){
       console.log("GIF");
 
       $("#gif").attr("src", "images/superstrike.gif");
+      gifcountdown();
 
+    } else if (lastgoal == 10 && !gamefinish){
+      $("#gif").attr("src", "images/strike.gif");
       gifcountdown();
 
     };

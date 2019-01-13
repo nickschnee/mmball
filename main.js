@@ -83,61 +83,61 @@ function thegame(){
       console.log('\u0007');
 
       //if (brightness == 0 && gamerunning){
-        if (brightness == 0 && gamerunning){
-          console.log('SCORE IN PIPE A + 10 Points');
+      if (brightness == 0 && gamerunning){
+        console.log('SCORE IN PIPE A + 10 Points');
 
-          score = score + 10;
-          console.log(score);
-          io.emit('score', score);
-          io.emit('lastgoal', 10);
-        };
-      });
+        score = score + 10;
+        console.log(score);
+        io.emit('score', score);
+        io.emit('lastgoal', 10);
+      };
+    });
 
-      sensor2.on("change", function() {
-        brightness = this.value;
-        console.log("Sensor 2: Die Helligkeit ist: " + this.value);
-        console.log('\u0007');
+    sensor2.on("change", function() {
+      brightness = this.value;
+      console.log("Sensor 2: Die Helligkeit ist: " + this.value);
+      console.log('\u0007');
 
-        if (brightness == 0 && gamerunning){
-          console.log('SCORE IN PIPE B + 25 Points');
+      if (brightness == 0 && gamerunning){
+        console.log('SCORE IN PIPE B + 25 Points');
 
-          score = score + 25;
-          console.log(score);
-          io.emit('score', score);
-          io.emit('lastgoal', 25);
-        };
-      });
+        score = score + 25;
+        console.log(score);
+        io.emit('score', score);
+        io.emit('lastgoal', 25);
+      };
+    });
 
-      io.on('connection', function(socket) {
+    io.on('connection', function(socket) {
 
-        socket.on('singleplayer', function(newgame){
-          console.log("Singleplayer");
-          singleplayer = true;
+      socket.on('singleplayer', function(newgame){
+        console.log("Singleplayer");
+        singleplayer = true;
 
-        }); // ENDE Function singleplayer
+      }); // ENDE Function singleplayer
 
-        socket.on('gamestart', function(gamestart){
-          //console.log("Das funktioniert so toll!");
-          gamerunning = gamestart;
-          console.log("das game läuft:" + gamerunning);
+      socket.on('gamestart', function(gamestart){
+        //console.log("Das funktioniert so toll!");
+        gamerunning = gamestart;
+        console.log("das game läuft:" + gamerunning);
 
-        }); // ENDE Function gamestart
+      }); // ENDE Function gamestart
 
-        socket.on('newgame', function(newgame){
-          console.log("NEW GAME");
+      socket.on('newgame', function(newgame){
+        score = 0;
+        gamerunning = false;
+        countdownstarted = false;
+        singleplayer = false;
 
-          score = 0;
-          gamerunning = false;
-          countdownstarted = false;
-          singleplayer = false;
+        thegame(); // start thegame() new
 
-          thegame(); // start thegame() new
+        console.log("NEW GAME");
 
-        }); // ENDE Function gamestart
+      }); // ENDE Function gamestart
 
-      }); //ENDE IO CONNECTION
-    }); // ENDE BOARD
+    }); //ENDE IO CONNECTION
+  }); // ENDE BOARD
 
-  }; // ENDE thegame()
+}; // ENDE thegame()
 
-  // SOCKET
+// SOCKET
