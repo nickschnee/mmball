@@ -1,15 +1,2 @@
-<b> Technische Beschreibung </b>
+<a href="https://paper.dropbox.com/doc/Systemdokumentation-MMBall--AVgmL55D8UtURActJHlJQamoAQ-7sQnKzrwOTCAGBAkayey1">Zur Projektdokumentation</a>
 
-
-<b> Verwendeted Technologien </b>
-
-<b>Technischer Aufbau</b>
-
-
-<b>Technische Herausforderungen</b>
-
-
-<b>Potentielle Weiterentwicklung</b>
-
-
-<b>Learnings</b>
