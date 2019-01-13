@@ -277,7 +277,7 @@ $(document).keydown(
     };
   });
 
-  // Modal Focus
+  // Control the focus in the overlay settings window
   $("#button-quit").focus(function(){
     $(".quit").toggleClass("hidden");
   });
@@ -303,8 +303,8 @@ $(document).keydown(
   });
 
   $("#button-settings").focus(function(){
-    $(".settings").toggleClass("hidden");
     $("#span-location").html(devicelocation);
+    $(".settings").toggleClass("hidden");
   });
 
   $("#button-settings").blur(function(){
@@ -663,9 +663,4 @@ $(document).keydown(
     $(".game-start").toggleClass('hidden');
     $(".game-intro").toggleClass('hidden');
     gameintro();
-  }
-
-  function adminmode(){
-    console.log("triggered!")
-    //$('#input-admin').focus();
   }
