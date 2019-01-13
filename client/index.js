@@ -27,7 +27,6 @@ var playersRef = dbRef.ref('players/');
 // ENDE Firebase
 // ENDE Firebase
 
-
 var socket = io.connect(window.location.href);
 
 var buttonstatus = false;
@@ -46,16 +45,24 @@ var highscore; // get the highscore from database gethighscore() to display at t
 
 // Define and Load Sounds
 var music_intro = new sound("sounds/music_intro.mp3");
-var music_gameplay = new sound("sounds/music_gameplay.mp3")
+var music_gameplay = new sound("sounds/gameplay_mmball_final.mp3");
+var sound_buzzer = new sound("sounds/sound_buzzer.mp3");
+var sound_highscore = new sound("sounds/sound_highscore.mp3");
+var sound_topten = new sound("sounds/sound_topten.mp3");
+var sound_nohighscore = new sound("sounds/sound_nohighscore.mp3");
+var sound_strike10 = new sound("sounds/sound_strike10.mp3");
+var sound_strike25 = new sound("sounds/sound_strike25.mp3");
+var sound_strike100 = new sound("sounds/sound_strike100.mp3");
+var sound_select = new sound ("sounds/sound_select.wav");
 
 // Start Gameplay
 // Show Start Screen on Document Ready
 $(document).ready(function(){
 
-  music_intro.loop();
-
   // Reset Variables on Server
   socket.emit('newgame', true);
+
+  music_intro.loop();
 
   gethighscore();
 
@@ -83,6 +90,8 @@ $(document).ready(function(){
 // Then Show Second Screen when pressed on button
 socket.on('button-status', function(buttonstatus) {
   console.log('Button Pressed, Game starting');
+
+  sound_buzzer.play();
 
   // When Buzzer is Pushed, Show Third Screen
   $(".game-start").toggleClass('hidden');
@@ -152,12 +161,13 @@ function play(){
     console.log("Der letzte Treffer gab " + lastgoal + " Punkte");
 
     if (lastgoal == 25 && !gamefinish){
-      console.log("GIF");
-
+      //console.log("GIF");
+      sound_strike25.play();
       $("#gif").attr("src", "images/superstrike.gif");
       gifcountdown();
 
     } else if (lastgoal == 10 && !gamefinish){
+      sound_strike10.play();
       $("#gif").attr("src", "images/strike.gif");
       gifcountdown();
 
@@ -182,11 +192,15 @@ function play(){
       $("#gif").addClass("endgif");
       $('#ingame').addClass("hidden");
 
-      if (endscore > highscore){
+      if (endscore == 0){
+        sound_nohighscore.play();
 
+      } else if (endscore > highscore){
+        sound_highscore.play();
         $("#gif").attr("src", "images/bern_gewinnt.gif");
 
       } else if (endscore <= highscore){
+        sound_topten.play();
         $("#gif").attr("src", "images/nohighscore.gif");
       }
 
@@ -244,10 +258,12 @@ $(document).keydown(
   {
     if (e.keyCode == 39) {
       $(".move:focus").next().focus();
+      sound_select.play();
     }
 
     if (e.keyCode == 37) {
       $(".move:focus").prev().focus();
+      sound_select.play();
     }
 
     //Open the Settings Window when ESCAPE is presseed.
@@ -550,8 +566,6 @@ $(document).keydown(
   function writeScore(){
     console.log("Inserted Player!")
     alreadyinserted = true;
-    //$('#button-newgame').toggleClass("hidden");
-
 
     playersRef.push({
       name: $('#playerinput').val(),
@@ -561,9 +575,7 @@ $(document).keydown(
       timestamp: timestamp
     });
 
-    //generateleaderboard();
     $('#button-global').focus();
-
   };
 
   // Generate HTML
