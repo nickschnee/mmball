@@ -88,9 +88,6 @@ socket.on('button-status', function(buttonstatus) {
   $(".game-start").toggleClass('hidden');
   $(".game-intro").toggleClass('hidden');
 
-  music_intro.stop();
-  music_gameplay.loop();
-
   //$("<img class='gif' src='images/countdown.gif' alt='GIF'> width='1000px' ").appendTo(".gifspace");
   $("#gif").attr("src", "images/countdown.gif");
 
@@ -101,6 +98,9 @@ socket.on('button-status', function(buttonstatus) {
 
 // Countdown is Starting
 function gameintro () {
+  music_intro.stop();
+  music_gameplay.loop();
+
   var timeleft = 12;
   var downloadTimer = setInterval(function(){
     timeleft--;
