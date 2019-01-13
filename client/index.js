@@ -69,7 +69,7 @@ $(document).ready(function(){
     //generateleaderboard();
     $('#button-global').focus();
 
-    console.log("I'm here!");
+    //console.log("I'm here!");
 
   });
 
@@ -199,6 +199,7 @@ function play(){
 
         // Display Leaderboard
         getrank(endscore);
+        console.log("Alreadyinserted is: " + alreadyinserted);
 
         // wegen DB latenz eine sekunde puffer einbauen
         setTimeout(function(){
@@ -485,7 +486,7 @@ $(document).keydown(
 
                 var key = childSnapshot.key;
                 var includeskey = keyarray.includes(key);
-                console.log(includeskey);
+                //console.log(includeskey);
                 //console.log(status);
                 if (includeskey == false) {
 
@@ -534,9 +535,12 @@ $(document).keydown(
 
   function getrank(endscore){
     var rankref = firebase.database().ref("players").orderByChild("score").startAt(endscore);
+    console.log(rankref);
     rankref.once("value")
     .then(function(snapshot) {
-      myrank = snapshot.numChildren() + 1;
+      //myrank = snapshot.numChildren() + 1;
+      myrank = snapshot.numChildren();
+      console.log("Myrank is: " + myrank);
 
     });
   };
