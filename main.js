@@ -12,6 +12,7 @@
 var express = require('express');
 var app = express()
 var server = require('http').Server(app);
+
 var io = require('socket.io')(server);
 
 // Raspberry libraries
@@ -79,6 +80,7 @@ function thegame(){
     sensor1.on("change", function() {
       brightness = this.value;
       console.log("Sensor 1: Die Helligkeit ist: " + this.value);
+      console.log('\u0007');
 
       //if (brightness == 0 && gamerunning){
         if (brightness == 0 && gamerunning){
@@ -94,6 +96,7 @@ function thegame(){
       sensor2.on("change", function() {
         brightness = this.value;
         console.log("Sensor 2: Die Helligkeit ist: " + this.value);
+        console.log('\u0007');
 
         if (brightness == 0 && gamerunning){
           console.log('SCORE IN PIPE B + 25 Points');
